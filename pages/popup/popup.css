@@ -1,0 +1,28 @@
+body {
+  background: #F3F3F3;
+  margin: 0;
+}
+
+div#container {
+  width: 240px;
+  overflow: hidden;
+}
+
+div.option {
+  padding: 5px;
+  border-top: 1px solid white;
+	border-bottom: 1px solid #DDD;
+}
+
+div.option:hover {
+  background: #BAFFFF;
+}
+
+div.option h3 {
+  margin: 3px 0 3px 0;
+}
+
+div.option p {
+  margin: 0;
+  color: #AAA;
+}
