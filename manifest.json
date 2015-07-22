@@ -14,7 +14,24 @@
   ],
   "background": {
     "scripts": [
-      "assets/js/jquery-2.1.3.min.js"
+      "assets/js/common/jquery-2.1.3.min.js"
     ]
-  }
+  },
+  "web_accessible_resources": [
+    "assets/js/modules/BotchanCommand.js",
+    "assets/js/modules/BotchanDatabase.js",
+    "assets/js/controllers/MainController.js"
+  ],
+  "content_scripts": [
+    {
+      /*"matches": ["http://kancolle.wikia.com/wiki/Special:Chat?useskin=wikia"],*/
+      "matches": ["http://botchan.wikia.com/wiki/Special:Chat"],
+      "js": [
+        "assets/js/common/jquery-2.1.3.min.js",
+        "assets/js/init.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
 }
