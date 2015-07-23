@@ -15,14 +15,15 @@
     else return false;
   }
 
-  BotchanCommand.prototype.overweight = function(current_weight) {
-    if(current_weight + this.weight > 3) return true;
+  BotchanCommand.prototype.overweight = function(current_weight, authority) {
+    if(authority) return false;
+    else if(current_weight + this.weight > 3) return true;
     else return false;
   }
 
   // This is run in the context of MainController
   BotchanCommand.prototype.execute = function(command, chat) {
-    if(!command.overweight(this.get_weight(chat))) {
+    if(!command.overweight(this.get_weight(chat), this.get_authority(chat))) {
       this.add_weight(chat, command.weight);
       var temp = chat.attributes.text.split(' ');
       temp.shift();

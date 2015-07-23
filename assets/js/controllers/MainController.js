@@ -5,6 +5,7 @@
     received_welcome: false,
     database: false,
     cooldowns: {},
+    links: [],
 
     is_inline: function(chat) {
       if(chat.attributes.isInlineAlert && chat.attributes.text.indexOf('has joined the chat.') != -1) return true;
@@ -82,6 +83,8 @@
         if(this.is_inline(chat)) {
           this.inline(chat);
         } else if(this.is_regular(chat)) {
+          this.check_links(chat);
+
           chat.attributes.text = this.strip_calls(chat);
           if(chat.attributes.text) {
             $.proxy(this.add_stars, mainRoom.viewDiscussion)(chat);
@@ -107,6 +110,12 @@
     },
 
     inline: function(chat) {
+    },
+
+    check_links: function(chat) {
+      var regex = /.*(https?[^\s]+).*/gi;
+      var match = regex.exec(chat.attributes.text);
+      if(null != match) this.links.push(match[1]);
     },
 
     regular: function(chat) {

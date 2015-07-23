@@ -33,7 +33,6 @@
   }
 
   BotchanDatabase.prototype.get_executable = function(command) {
-    console.log(command.type);
     if(command.type == "redirect") return this.get_executable(command.redirect);
     else return command;
   }
@@ -67,13 +66,14 @@
     this.add_redirect('^can i ask a question', redirect);
     this.add_text('^what is life', 3, '42.');
     this.add_text('^what is love.?$', 3, 'Baby don\'t hurt me.');
-    this.add_text('^(baby)?dont\\s?hurt me.?$', 3, 'NO MOAR.');
+    this.add_text('^(baby\\s)?don\'?t hurt me.?$', 3, 'NO MOAR.');
     this.add_text('^you suck', 3, 'Not as hard as you.');
     this.add_text('^give me luck', 3, 'You have lost 20 luck from asking for this. You must now attempt ALL-7 LSC within the next 24 hours.');
     this.add_text('^can i become chat\\s?mod.?$', 3, 'If you donate $5000 to Nanamin.');
     this.add_text('^fetch', 3, '/me grabs stick.');
     this.add_text('love me', 3, 'You haven\'t bought enough 700 yen rings.');
     this.add_text('^what version number', 3, 'v. Skynet.');
+
     this.add_text('^jwt.?$', 3, 'Kick it!');
     this.add_text('^cdrw.?$', 3, 'Daily reminder to CDRW to fire TheLenrir.');
     this.add_text('^af.?$', 3, 'http://img3.wikia.nocookie.net/__cb20150211023826/kancolle/images/a/a3/KCLcomic.jpg');
@@ -82,24 +82,27 @@
     this.add_text('^hoppou?.?$', 3, 'レップウ...オイテケ......');
     this.add_text('roma', 3, 'Roma? She doesn\'t exist.');
     this.add_text('(?=.*\\becho\\b)(?=.*(\\bsakawa\\b|\\bpyan\\b))', 3, 'Hah! She won\'t be dropping.');
-    this.add_text( '^dechi', 3, '(de) (chi)');
+
+    this.add_text( '^dechi', 3, '(de ) (chi )');
     this.add_text('^nanodesu', 3, '(na) (no) (de) (su)');
     this.add_text('^nanodeath', 3, '(nanodesu)');
-    this.add_text('^emoticon list.?$', 0, 'http://kancolle.wikia.com/wiki/MediaWiki:Emoticons');
+
     this.add_text('^poi.?$', 1, 'http://anohito.tw/poi/');
     this.add_text('^naka', 1, 'https://www.youtube.com/watch?v=8l5cJBpTNQE');
     this.add_text('^yasen.?$', 1, 'https://www.youtube.com/watch?v=zvg7hHTnJVk');
     this.add_text('^kuma.?$', 1, 'https://www.youtube.com/watch?v=yxUpJnySeCQ');
     this.add_text('^shireee.?$', 1, 'https://www.youtube.com/watch?v=ocDB5zxSrgQ');
-    this.add_text('^mogu\\smogu.?$', 1, 'http://www.myinstants.com/instant/mogu-mogu/');
+    this.add_text('^mogu\\s?mogu.?$', 1, 'http://www.myinstants.com/instant/mogu-mogu/');
     this.add_text('^deesu.?$', 1, 'https://www.youtube.com/watch?v=TtlrQKOeFM8');
     this.add_text('^anthem.?$', 1, 'https://www.youtube.com/watch?v=ocaq4c-YbwQ');
     redirect = this.add_text('^taigei.?$', 1, 'https://www.youtube.com/watch?v=VjdV-CSxyKc');
     this.add_redirect('^\\(?whale\\)?.?$', redirect);
     this.add_text('^unlimited (cat|error) works.?$', 1, 'http://i.imgur.com/Aa5nSof.jpg');
+
     redirect = this.add_text('^tweets.?$', 0, 'https://twitter.com/kancolle_staff');
     this.add_redirect('^twitter.?$', redirect);
     this.add_redirect('^(staff|dev)\\s(tweets|twitter).?$', redirect);
+    this.add_text('^emoticon list.?$', 0, 'http://kancolle.wikia.com/wiki/MediaWiki:Emoticons');
     this.add_text('^kc3 kai.?$', 0, 'http://kancolle.wikia.com/wiki/User_blog:Dragonjet/KC3%E6%94%B9');
     this.add_text('^orel cruising', 1, 'https://www.youtube.com/watch?v=c1-TPCwXV8s');
     this.add_text('^lsc.?$', 1, 'https://www.youtube.com/watch?v=lw7IA1AEVVA');
@@ -114,9 +117,11 @@
     this.add_text('event guide', 0, 'http://kancolle.wikia.com/wiki/User_blog:Shinhwalee/Major_Event_Preparation_Guide_for_Admirals');
     this.add_text('^arsenal.?$', 0, 'http://kancolle.wikia.com/wiki/Akashi%27s_Improvement_Arsenal');
     this.add_text('^suggestion thread', 0, 'http://kancolle.wikia.com/wiki/Thread:233278');
+
     this.add_text('^1-5 guide', 0, 'http://kancolle.wikia.com/wiki/User_blog:Admiral_Mikado/Extra_Operations_for_Dummies:_1-5');
     this.add_text('^3-2 leveling', 0, 'http://kancolle.wikia.com/wiki/User_blog:Shinhwalee/Guide_to_Power_Leveling_Heavy_Cruiser_%28CA%29_in_World_3-2A');
     this.add_text('^4-3 leveling', 0, 'http://kancolle.wikia.com/wiki/User_blog:Shinhwalee/World_4-3_Power_Level_Guide_for_DD_%26_CL');
+
     this.add_text('as 1-1|1-1 as', 0, '[1-1] No AS values on this map');
     this.add_text('as 1-2|1-2 as', 0, '[1-2] No AS values on this map');
     this.add_text('as 1-3|1-3 as', 0, '[1-3] No AS values on this map');
@@ -168,12 +173,12 @@
 		redirect = this.add_function('^pick', 2, function(input, name, authority) {
 			var choices = input.split(' or ');
 			var rand = Math.floor(Math.random() * choices.length);
-			this.say(choices[rand] + '.');
+			this.say(this.remove_trailing(choices[rand], '.') + '.');
 		});
 		this.add_redirect('^choose', redirect);
 		
 		redirect = this.add_function('^latest links', 3, function(input, name, authority) {
-			var latest_links = window.botchan_vars.links.slice(-5);
+			var latest_links = this.links.slice(-5);
 			this.say('Latest links (WARNING: May contain NSFW links):\n' + latest_links.join('\n'));
 		});
 		this.add_redirect('^recent links', redirect);
