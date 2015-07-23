@@ -80,7 +80,7 @@
     redirect = this.add_text('^khorosho.?$', 3, 'хорошо.');
     this.add_redirect('^harasho.?$', redirect);
     this.add_text('^hoppou?.?$', 3, 'レップウ...オイテケ......');
-    this.add_text('roma', 3, 'Roma? She doesn\'t exist.');
+    this.add_text('roma', 3, 'https://gyazo.com/6b5cc8aaf5158325d1052ff0187ea8c7');
     this.add_text('(?=.*\\becho\\b)(?=.*(\\bsakawa\\b|\\bpyan\\b))', 3, 'Hah! She won\'t be dropping.');
 
     this.add_text( '^dechi', 3, '(de ) (chi )');
@@ -201,13 +201,13 @@
 						mainRoom.baseOpenPrivateRoom(data, true);
 						mainRoom.showRoom(data.get('roomId'));
 						mainRoom.chats.privates[data.get('roomId')].init();
-						var chatEntry = new models.ChatEntry({roomId: data.get('roomId'), name: wgUserName, text: 'All links stored (WARNING: May contain NSFW links):\n' + window.botchan_vars.links.all.join('\n')});
+						var chatEntry = new models.ChatEntry({roomId: data.get('roomId'), name: wgUserName, text: 'All links stored (WARNING: May contain NSFW links):\n' + this.links.all.join('\n')});
 						mainRoom.chats.privates[data.get('roomId')].socket.send(chatEntry.xport());
 					}, this)
 				});
 			} else {
 				var privateRoomId = mainRoom.model.privateUsers.findByName(name).attributes.roomId;
-				var chatEntry = new models.ChatEntry({roomId: privateRoomId, name: wgUserName, text: 'All links stored (WARNING: May contain NSFW links):\n' + window.botchan_vars.links.all.join('\n')});
+				var chatEntry = new models.ChatEntry({roomId: privateRoomId, name: wgUserName, text: 'All links stored (WARNING: May contain NSFW links):\n' + this.links.all.join('\n')});
 				mainRoom.chats.privates[privateRoomId].socket.send(chatEntry.xport());
 			}
 		});
@@ -254,43 +254,43 @@
 		
 		this.add_function('^reset games', 0, function(input, name, authority) {
 			if(authority == 3) {
-				window.botchan_vars.game_cooldowns = {};
+				this.game_cooldowns = {};
 				this.say('Game cooldowns reset!');
 			}
 		});
 		
-		redirect = this.add_function('^reset\\sall', 0, function(input, name, authority) {
+		redirect = this.add_function('^reset all', 0, function(input, name, authority) {
 			if(authority == 3) {
-				window.botchan_vars.personal_cooldowns = [];
+				this.cooldowns = [];
 				this.say('All cooldowns reset!');
 			}
 		});
-		this.add_redirect('^reset\\scooldowns', redirect);
+		this.add_redirect('^reset cooldowns', redirect);
 		
 		this.add_function('^reset', 0, function(input, name, authority) {
 			if(authority == 3) {
-				window.botchan_vars.personal_cooldowns[this.remove_trailing(input, '.')] = [];
+				this.cooldowns[this.remove_trailing(input, '.')] = [];
 				this.say('Cooldowns reset for ' + this.remove_trailing(input, '.') + '!');
 			}
 		});
 		
 		this.add_function('^silence left', 0, function(input, name, authority) {
       if(authority) {
-        if(!window.botchan_vars.silence) window.botchan_vars.silence = 0;
-        this.say(parseInt((window.botchan_vars.silence - new Date().getTime()) / 60000) + ' minutes remaining.');
+        if(!this.silence) this.silence = 0;
+        this.say(parseInt((this.silence - new Date().getTime()) / 60000) + ' minutes remaining.');
       }
 		});
 		
 		this.add_function('^silence', 0, function(input, name, authority) {
 			if(authority) {
-				window.botchan_vars.silence = new Date().getTime() + (parseInt(input) * 60000);
+				this.silence = new Date().getTime() + (parseInt(input) * 60000);
 			}
 		});
 		
 		this.add_function('^add explosion', 0, function(input, name, authority) {
 			if(authority) {
 				input = this.remove_trailing(input.substr(10), '.');
-				window.botchan_vars.whitelist.push(input.toString());
+				this.explosions.push(input.toString());
 				this.say(input + ' has been added to the list of explosion targets!');
 			}
 		});
@@ -298,11 +298,11 @@
 		this.add_function('^remove explosion', 0, function(input, name, authority) {
 			if(authority) {
 				input = this.remove_trailing(input.substr(10), '.');
-				var index = window.botchan_vars.whitelist.indexOf(input);
+				var index = this.explosions.indexOf(input);
 				if(input == 'Akios') {
 					this.say('Akios can\'t be removed from the list.');
 				} else if(index != -1) {
-					window.botchan_vars.whitelist.splice(index, 1);
+					this.explosions.splice(index, 1);
 					this.say(input + ' has been removed from the list of explosion targets!');
 				} else {
 					this.say(input + ' wasn\'t in the list!');
@@ -310,117 +310,115 @@
 			}
 		});
 		
-		this.add_function('^list\\sexplosion', 0, function(input, name, authority) {
+		this.add_function('^list explosion', 0, function(input, name, authority) {
 			if(authority) {
-				this.say('Current possible targets: ' + window.botchan_vars.whitelist.join(', '));
+				this.say('Current possible targets: ' + this.explosions.join(', '));
 			}
 		});
 		
-		this.add_function('^clear\\sexplosion', 0, function(input, name, authority) {
+		this.add_function('^clear explosion', 0, function(input, name, authority) {
 			if(authority) {
-				window.botchan_vars.whitelist = ['Akios'];
+				this.explosions = ['Akios'];
 				this.say('Explosion list reset!');
 			}
 		});
 		
-		this.add_function('^i\\s(wanna|want to)\\splay', 2, function(input, name, authority) {
-			if(window.botchan_vars.players.indexOf(name) != -1) {
+		this.add_function('^i (wanna|want to) play', 2, function(input, name, authority) {
+			if(this.players.indexOf(name) != -1) {
 				this.say('You already registered, ' + name + '.');
 			} else {
-				if(window.botchan_vars.players === undefined) window.botchan_vars.players = [];
-				window.botchan_vars.players.push(name);
+				this.players.push(name);
 				this.say(name + ' has registered to play!');
 			}
 		});
 		
-		this.add_function('^i\\squit', 0, function(input, name, authority) {
-			var index = window.botchan_vars.players.indexOf(name);
+		this.add_function('^i quit', 0, function(input, name, authority) {
+			var index = this.players.indexOf(name);
 			if(index != -1) {
-				window.botchan_vars.players.splice(index, 1);
+				this.players.splice(index, 1);
 				this.say(name + ' has quit!');
 			} else {
 				this.say(name + ', you were never playing!');
 			}
 		});
 		
-		this.add_function('^reverse\\sroulette', 0, function(input, name, authority) {
-			if(window.botchan_vars.players.length < 2) {
+		this.add_function('^reverse roulette', 0, function(input, name, authority) {
+			if(this.players.length < 2) {
 				this.say('We need at least two people.');
 			} else {
-				var rand = Math.floor(Math.random() * window.botchan_vars.players.length);
-				var loser = window.botchan_vars.players[rand];
+				var rand = Math.floor(Math.random() * this.players.length);
+				var loser = this.players[rand];
 				this.kick(loser);
 				if(loser != name) {
-					if(!window.botchan_vars.personal_cooldowns[loser]) window.botchan_vars.personal_cooldowns[loser] = [];
+					if(!this.cooldowns[loser]) this.cooldowns[loser] = [];
 					for(var i = 0; i < 2; i++) {
-						window.botchan_vars.personal_cooldowns[loser].push(new Date().getTime() + 15 * 60000);
+						cooldowns[loser].push(new Date().getTime() + 15 * 60000);
 					}
 				}
-				if(!window.botchan_vars.personal_cooldowns[name]) window.botchan_vars.personal_cooldowns[name] = [];
+				if(!this.cooldowns[name]) this.cooldowns[name] = [];
 				for(var i = 0; i < 2; i++) {
-					window.botchan_vars.personal_cooldowns[name].push(new Date().getTime() + 15 * 60000);
+					this.cooldowns[name].push(new Date().getTime() + 15 * 60000);
 				}
-				window.botchan_vars.players.splice(rand, 1);
+				this.players.splice(rand, 1);
 			}
 		});
 		
-		this.add_function('^russian\\sroulette', 0, function(input, name, authority) {
-			if(!window.botchan_vars.game_cooldowns.russian_roulette) window.botchan_vars.game_cooldowns.russian_roulette = 0;
-			if(window.botchan_vars.game_cooldowns.russian_roulette - new Date().getTime() > 0) return true;
-			if(window.botchan_vars.players.indexOf(name) == -1) return true;
+		this.add_function('^russian roulette', 0, function(input, name, authority) {
+			if(!this.game_cooldowns.russian_roulette) this.game_cooldowns.russian_roulette = 0;
+			if(this.game_cooldowns.russian_roulette - new Date().getTime() > 0) return true;
+			if(this.players.indexOf(name) == -1) return true;
 			
-			if(window.botchan_vars.players.length < 2) {
+			if(this.players.length < 2) {
 				this.say('We need at least two people.');
 			} else {
-				while(window.botchan_vars.players.length > 1) {
-					var rand = Math.floor(Math.random() * window.botchan_vars.players.length);
-					this.kick(window.botchan_vars.players[rand]);
-					window.botchan_vars.players.splice(rand, 1);
+				while(this.players.length > 1) {
+					var rand = Math.floor(Math.random() * this.players.length);
+					this.kick(this.players[rand]);
+					this.players.splice(rand, 1);
 				}
-				var winner = window.botchan_vars.players.pop();
-				window.botchan_vars.personal_cooldowns[winner] = [];
+				var winner = this.players.pop();
+				this.cooldowns[winner] = [];
 				this.say(winner + ' is the winner! Their cooldowns have been reset!');
-				window.botchan_vars.game_cooldowns.russian_roulette = new Date().getTime() + 15 * 60000;
+				this.game_cooldowns.russian_roulette = new Date().getTime() + 15 * 60000;
 			}
 		});
 		
 		this.add_function('^rps', 0, function(input, name, authority) {
-			if(!window.botchan_vars.game_cooldowns.rps) window.botchan_vars.game_cooldowns.rps = 0;
-			if(window.botchan_vars.game_cooldowns.rps - new Date().getTime() > 0) return true;
-			if(window.botchan_vars.flags['rps']) return true;
+			if(this.game_cooldowns.rps - new Date().getTime() > 0) return true;
+			if(this.flags['rps']) return true;
 			
 			this.say('Rock, Paper, Scissors is starting! Say "rock", "paper", or "scissors" to me to play!');
-			window.botchan_vars.flags['rps'] = true;
-			window.botchan_vars.timers['rps'] = setInterval(CheckRPS(), 10000);
+			this.flags['rps'] = true;
+			this.timers['rps'] = setInterval(CheckRPS(), 10000);
 		});
 		
 		this.add_function('rock', 0, function(input, name, authority) {
-			if(!window.botchan_vars.flags['rps']) return true;
-			if(!window.botchan_vars.rps['rock']) window.botchan_vars.rps['rock'] = [];
-			window.botchan_vars.rps['rock'].push(name);
+			if(!this.flags['rps']) return true;
+			if(!this.rps['rock']) this.rps['rock'] = [];
+			this.rps['rock'].push(name);
 		});
 		
 		this.add_function('paper', 0, function(input, name, authority) {
-			if(!window.botchan_vars.flags['rps']) return true;
-			if(!window.botchan_vars.rps['paper']) window.botchan_vars.rps['paper'] = [];
-			window.botchan_vars.rps['paper'].push(name);
+			if(!this.flags['rps']) return true;
+			if(!this.rps['paper']) this.rps['paper'] = [];
+			this.rps['paper'].push(name);
 		});
 		
 		this.add_function('scissors', 0, function(input, name, authority) {
-			if(!window.botchan_vars.flags['rps']) return true;
-			if(!window.botchan_vars.rps['scissors']) window.botchan_vars.rps['scissors'] = [];
-			window.botchan_vars.rps['scissors'].push(name);
+			if(!this.flags['rps']) return true;
+			if(!this.rps['scissors']) this.rps['scissors'] = [];
+			this.rps['scissors'].push(name);
 		});
 		
-		this.add_function('(who\'?s|who\\sis)\\splaying', 1, function(input, name, authority) {
-			if(window.botchan_vars.players.length > 0) {
-				this.say('Players: ' + window.botchan_vars.players.join(', '));
+		this.add_function('(who\'?s|who is) playing', 1, function(input, name, authority) {
+			if(this.players.length > 0) {
+				this.say('Players: ' + this.players.join(', '));
 			} else {
 				this.say('Nobody is playing at the moment.');
 			}
 		});
 		
-		this.add_function('^who\\sam\\si', 3, function(input, name, authority) {
+		this.add_function('^who am i', 3, function(input, name, authority) {
 			this.say(name + '.');
 		});
 		
@@ -434,14 +432,14 @@
 		
 		this.add_function('^register', 0, function(input, name, authority) {
 			input = input.split(' = ');
-			window.botchan_vars.infobits[input[0]] = this.remove_trailing(input[1], '.');
+			this.infobits[input[0]] = this.remove_trailing(input[1], '.');
 			this.say('"' + input[0] + '" has been registered with value "' + input[1] + '".');
 		});
 		
 		this.add_function('^recall', 0, function(input, name, authority) {
 			input = this.remove_trailing(input, '.');
-			if(window.botchan_vars.infobits[input] != undefined) {
-				this.say(input + ': ' + window.botchan_vars.infobits[input] + '.');
+			if(this.infobits[input] != undefined) {
+				this.say(input + ': ' + this.infobits[input] + '.');
 			}
 		});
 	};

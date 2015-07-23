@@ -5,7 +5,24 @@
     received_welcome: false,
     database: false,
     cooldowns: {},
+    game_cooldowns: {
+      russian_roulette: 0,
+      rps: 0,
+    },
+    flags: {
+      rps: false,
+    },
+    rps: {
+      rock: [],
+      paper: [],
+      scissors: [],
+    },
+    timers: {},
     links: [],
+    silence: 0,
+    explosions: ['Akios'],
+    players: [],
+    infobits: {},
 
     is_inline: function(chat) {
       if(chat.attributes.isInlineAlert && chat.attributes.text.indexOf('has joined the chat.') != -1) return true;
