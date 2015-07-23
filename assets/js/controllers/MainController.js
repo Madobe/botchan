@@ -26,7 +26,7 @@
 
     get_weight(chat) {
       if(this.cooldowns[chat.attributes.name]) {
-        return this.cooldowns[chat.attributes.name];
+        return this.cooldowns[chat.attributes.name].length;
       } else {
         this.cooldowns[chat.attributes.name] = [];
         return 0;
