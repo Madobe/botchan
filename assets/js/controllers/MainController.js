@@ -26,9 +26,11 @@
     },
 
     remove_trailing(text, remove) {
-      while(text.charAt(0) == remove) {text = text.substring(1, text.length);}
-      while(text.charAt(text.length - 1) == remove) {text = text.substring(0, text.length - 1);}
-      return text;
+      text = text.split('');
+      while(text[0] == remove) { text.shift() }
+      text.reverse();
+      while(text[0] == remove) { text.shift() }
+      return text.reverse().join('');
     },
 
     get_authority(chat) {

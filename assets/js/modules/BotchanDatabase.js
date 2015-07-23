@@ -33,7 +33,8 @@
   }
 
   BotchanDatabase.prototype.get_executable = function(command) {
-    if(command.type == "redirect") this.get_executable(command.redirect);
+    console.log(command.type);
+    if(command.type == "redirect") return this.get_executable(command.redirect);
     else return command;
   }
 
@@ -218,7 +219,8 @@
 		redirect = this.add_function('^kick', 0, function(input, name, authority) {
 			if(authority) {
         var short = {'JWT': 'JustWastingTime', 'TS': 'TScript'};
-        if(short[this.remove_trailing(input, '.']) input = short[this.remove_trailing(input, '.')];
+        if(short[this.remove_trailing(input, '.')]) input = short[this.remove_trailing(input, '.')];
+        input = this.extract_name(input);
         this.say('Get rekt!');
         this.kick(input);
       }

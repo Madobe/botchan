@@ -24,7 +24,10 @@
   BotchanCommand.prototype.execute = function(command, chat) {
     if(!command.overweight(this.get_weight(chat))) {
       this.add_weight(chat, command.weight);
-      $.proxy(command.message, this)(this.strip_calls(chat), chat.attributes.name, this.get_authority(chat));
+      var temp = chat.attributes.text.split(' ');
+      temp.shift();
+      chat.attributes.text = temp.join(' ');
+      $.proxy(command.message, this)(chat.attributes.text, chat.attributes.name, this.get_authority(chat));
     }
   }
 })();
