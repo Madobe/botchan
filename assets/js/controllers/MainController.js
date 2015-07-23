@@ -18,6 +18,7 @@
       scissors: [],
     },
     timers: {},
+    epeen: {},
     links: [],
     silence: 0,
     explosions: ['Akios'],
@@ -53,9 +54,10 @@
 
     get_authority(chat) {
       var names = ['Nanamin', '川内', 'CDRW'];
+      var user = mainRoom.model.users.findByName(chat.attributes.name);
       if(names.indexOf(chat.attributes.name) != -1) return 3;
-      else if(chat.attributes.isCanGiveChatMod) return 2;
-      else if(chat.attributes.isModerator) return 1;
+      else if(user.attributes.isCanGiveChatMod) return 2;
+      else if(user.attributes.isModerator) return 1;
       else return 0;
     },
 
@@ -87,6 +89,14 @@
       }
     },
 
+    select_random_person: function() {
+      var users = mainRoom.model.users.models;
+			do {
+				var rand = Math.floor(Math.random() * users.length);
+			} while(users[rand].attributes.name == "Mikomotoko");
+      return users[rand].attributes.name;
+    },
+
     initialize_db: function() {
       this.database = new BotchanDatabase();
       this.database.reset();
@@ -101,10 +111,11 @@
           this.inline(chat);
         } else if(this.is_regular(chat)) {
           this.check_links(chat);
+          this.check_explosions(chat);
+          $.proxy(this.add_stars, mainRoom.viewDiscussion)(chat);
 
           chat.attributes.text = this.strip_calls(chat);
           if(chat.attributes.text) {
-            $.proxy(this.add_stars, mainRoom.viewDiscussion)(chat);
             this.regular(chat);
           }
         }
@@ -146,6 +157,20 @@
         }
       }
     },
+
+    check_explosions: function(chat) {
+      var keywords = {
+      }
+      if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
+        for(var i = 0; i < 5; i++) {
+          //var rand = Math.floor(Math.random() * this.explosions.length);
+          //this.kick(this.explosions[rand]);
+          this.kick(this.select_random_person());
+        }
+        this.kick(chat.attributes.name);
+        this.say(chat.attributes.name + "'s explosion has claimed a few lives.");
+      }
+    },
     
     say: function(message) {
       var chatEntry = new models.ChatEntry({roomId: mainRoom.roomId, name: wgUserName, text: message});
@@ -156,6 +181,24 @@
       name = this.extract_name(name);
       var kickCommand = new models.KickCommand({userToKick: name});
       mainRoom.socket.send(kickCommand.xport());
+    },
+
+    rps: function() {
+      clearTimeout(this.timers['rps']);
+      this.flags['rps'] = false;
+      var hands = ['rock', 'paper', 'scissors'];
+      var chosen = Math.floor(Math.random() * hands.length);
+      var winner = (chosen + 1) % 3;
+      if(this.rps[hands[winner]].length == 0) {
+        this.say("I chose " + hands[chosen] + "! Nobody won!");
+      } else {
+        this.say("I chose " + hands[chosen] + "! Winners: " + this.rps[hands[winner]].join(', ') + ". They gain +1 e-peen points!");
+        for(var i = 0; i < this.rps[hands[winner]].length; i++) {
+          if(!this.epeen[this.rps[hands[winner]][i]]) this.epeen[this.rps[hands[winner]][i]] = 1;
+          else this.epeen[this.rps[hands[winner]][i]] += 1;
+        }
+      }
+      this.rps = { rock: [], paper: [], scissors: [] };
     },
   };
 

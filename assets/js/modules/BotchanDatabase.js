@@ -255,6 +255,9 @@
 		this.add_function('^reset games', 0, function(input, name, authority) {
 			if(authority == 3) {
 				this.game_cooldowns = {};
+        this.flags.rps = false;
+        this.rps = { rock: [], paper: [], scissors: [] };
+        this.timers = {};
 				this.say('Game cooldowns reset!');
 			}
 		});
@@ -342,7 +345,7 @@
 			}
 		});
 		
-		this.add_function('^reverse roulette', 0, function(input, name, authority) {
+		this.add_function('^russian roulette', 0, function(input, name, authority) {
 			if(this.players.length < 2) {
 				this.say('We need at least two people.');
 			} else {
@@ -363,7 +366,7 @@
 			}
 		});
 		
-		this.add_function('^russian roulette', 0, function(input, name, authority) {
+		this.add_function('^reverse roulette', 0, function(input, name, authority) {
 			if(!this.game_cooldowns.russian_roulette) this.game_cooldowns.russian_roulette = 0;
 			if(this.game_cooldowns.russian_roulette - new Date().getTime() > 0) return true;
 			if(this.players.indexOf(name) == -1) return true;
@@ -378,7 +381,9 @@
 				}
 				var winner = this.players.pop();
 				this.cooldowns[winner] = [];
-				this.say(winner + ' is the winner! Their cooldowns have been reset!');
+				this.say(winner + ' is the winner! Their cooldowns have been reset and they have been awarded 1 e-peen point!');
+        if(!this.epeen[winner]) this.epeen[winner] = 1;
+        else this.epeen[winner] += 1;
 				this.game_cooldowns.russian_roulette = new Date().getTime() + 15 * 60000;
 			}
 		});
@@ -389,7 +394,7 @@
 			
 			this.say('Rock, Paper, Scissors is starting! Say "rock", "paper", or "scissors" to me to play!');
 			this.flags['rps'] = true;
-			this.timers['rps'] = setInterval(CheckRPS(), 10000);
+			this.timers['rps'] = setTimeout($.proxy(this.rps, MainController), 20000);
 		});
 		
 		this.add_function('rock', 0, function(input, name, authority) {
@@ -409,6 +414,11 @@
 			if(!this.rps['scissors']) this.rps['scissors'] = [];
 			this.rps['scissors'].push(name);
 		});
+
+    this.add_function('^my e-peen', 1, function(input, name, authority) {
+      var epeen = this.epeen[name] || 0;
+      this.say("Your e-peen is " + epeen + " falukorv long!");
+    });
 		
 		this.add_function('(who\'?s|who is) playing', 1, function(input, name, authority) {
 			if(this.players.length > 0) {
@@ -423,11 +433,7 @@
 		});
 		
 		this.add_function('^who', 2, function(input, name, authority) {
-			var users = mainRoom.model.users.models;
-			do {
-				var rand = Math.floor(Math.random() * users.length);
-			} while(users[rand].attributes.name == "Mikomotoko");
-			this.say(users[rand].attributes.name + '.');
+			this.say(this.select_random_person() + '.');
 		});
 		
 		this.add_function('^register', 0, function(input, name, authority) {
