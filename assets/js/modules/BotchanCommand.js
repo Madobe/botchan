@@ -15,7 +15,16 @@
     else return false;
   }
 
+  BotchanCommand.prototype.overweight = function(current_weight) {
+    if(current_weight + this.weight > 3) return true;
+    else return false;
+  }
+
   // This is run in the context of MainController
-  BotchanCommand.prototype.execute = function(chat) {
+  BotchanCommand.prototype.execute = function(command, chat) {
+    if(!command.overweight(this.get_weight(chat))) {
+      this.add_weight(command.weight);
+      $.proxy(command.message, this)(this.strip_calls(chat), chat.attributes.name, this.get_authority(chat));
+    }
   }
 })();

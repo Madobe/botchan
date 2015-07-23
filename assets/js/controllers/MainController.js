@@ -4,6 +4,7 @@
   window.MainController = {
     received_welcome: false,
     database: false,
+    cooldowns: {},
 
     is_inline: function(chat) {
       if(chat.attributes.isInlineAlert && chat.attributes.text.indexOf('has joined the chat.') != -1) return true;
@@ -15,12 +16,29 @@
       return false;
     },
 
-    get_authority(attributes) {
+    get_authority(chat) {
       var names = ['Nanamin', '川内', 'CDRW'];
-      if(names.indexOf(attributes.name) != -1) return 3;
-      else if(attributes.isCanGiveChatMod) return 2;
-      else if(attributes.isModerator) return 1;
+      if(names.indexOf(chat.attributes.name) != -1) return 3;
+      else if(chat.attributes.isCanGiveChatMod) return 2;
+      else if(chat.attributes.isModerator) return 1;
       else return 0;
+    },
+
+    get_weight(chat) {
+      if(this.cooldowns[chat.attributes.name]) {
+        return this.cooldowns[chat.attributes.name];
+      } else {
+        this.cooldowns[chat.attributes.name] = [];
+        return 0;
+      }
+    },
+
+    add_weight(chat, weight) {
+      if(!this.cooldowns[chat.attributes.name]) this.cooldowns[chat.attributes.name] = [];
+      var time = new Date().getTime();
+      for(var i = 0; i < weight; i++) {
+        this.cooldowns[chat.attributes.name].push(time);
+      }
     },
 
     strip_calls: function(chat) {
@@ -40,15 +58,18 @@
     },
 
     respond: function(chat) {
-      if(!MainController.database) MainController.initialize_db();
+      if(!this.database) this.initialize_db();
       if(chat.attributes.text == "Welcome to the Botchan Wikia chat" && chat.attributes.isInlineAlert) {
-        MainController.received_welcome = true;
-      } else if(MainController.received_welcome) {
-        if(MainController.is_inline(chat)) {
-          MainController.inline(chat);
-        } else if(MainController.is_regular(chat)) {
-          $.proxy(MainController.add_stars, mainRoom.viewDiscussion)(chat);
-          MainController.regular(chat);
+        this.received_welcome = true;
+      } else if(this.received_welcome) {
+        if(this.is_inline(chat)) {
+          this.inline(chat);
+        } else if(this.is_regular(chat)) {
+          chat.attributes.text = this.strip_calls(chat);
+          if(chat.attributes.text) {
+            $.proxy(this.add_stars, mainRoom.viewDiscussion)(chat);
+            this.regular(chat);
+          }
         }
       }
     },
@@ -74,8 +95,12 @@
     regular: function(chat) {
       var command = this.database.search(chat.attributes.text);
       if(command) {
-        if(command.type == "text") this.say(command.message);
-        else if(command.type == "function") this.execute(command, chat);
+        if(command.type == "text") {
+          this.add_weight(command.weight);
+          this.say(command.message);
+        } else if(command.type == "function") {
+          $.proxy(command.message, this)(command, chat);
+        }
       }
     },
     
@@ -83,11 +108,7 @@
       var chatEntry = new models.ChatEntry({roomId: mainRoom.roomId, name: wgUserName, text: message});
       mainRoom.socket.send(chatEntry.xport());
     },
-
-    execute: function(command, chat) {
-      $.proxy(command.message, this)(chat);
-    }
   };
 
-  mainRoom.model.chats.bind('afteradd', $.proxy(MainController.respond, mainRoom.viewDiscussion));
+  mainRoom.model.chats.bind('afteradd', $.proxy(MainController.respond, MainController));
 })();
