@@ -16,6 +16,21 @@
       return false;
     },
 
+    extract_name(text) {
+      if(mainRoom.model.users.findByName(text) === undefined) {
+        text = text.split('');
+        text.pop();
+        text = text.join('');
+      }
+      return text;
+    },
+
+    remove_trailing(text, remove) {
+      while(text.charAt(0) == remove) {text = text.substring(1, text.length);}
+      while(text.charAt(text.length - 1) == remove) {text = text.substring(0, text.length - 1);}
+      return text;
+    },
+
     get_authority(chat) {
       var names = ['Nanamin', '川内', 'CDRW'];
       if(names.indexOf(chat.attributes.name) != -1) return 3;
@@ -107,6 +122,12 @@
     say: function(message) {
       var chatEntry = new models.ChatEntry({roomId: mainRoom.roomId, name: wgUserName, text: message});
       mainRoom.socket.send(chatEntry.xport());
+    },
+
+    kick: function(name) {
+      name = this.extract_name(name);
+      var kickCommand = new models.KickCommand({userToKick: name});
+      mainRoom.socket.send(kickCommand.xport());
     },
   };
 
