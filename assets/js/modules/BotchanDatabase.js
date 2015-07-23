@@ -256,7 +256,7 @@
 			if(authority == 3) {
 				this.game_cooldowns = {};
         this.flags.rps = false;
-        this.rps = { rock: [], paper: [], scissors: [] };
+        this.rps_players = { all: [], rock: [], paper: [], scissors: [] };
         this.timers = {};
 				this.say('Game cooldowns reset!');
 			}
@@ -355,7 +355,7 @@
 				if(loser != name) {
 					if(!this.cooldowns[loser]) this.cooldowns[loser] = [];
 					for(var i = 0; i < 2; i++) {
-						cooldowns[loser].push(new Date().getTime() + 15 * 60000);
+						this.cooldowns[loser].push(new Date().getTime() + 15 * 60000);
 					}
 				}
 				if(!this.cooldowns[name]) this.cooldowns[name] = [];
@@ -394,25 +394,29 @@
 			
 			this.say('Rock, Paper, Scissors is starting! Say "rock", "paper", or "scissors" to me to play!');
 			this.flags['rps'] = true;
-			this.timers['rps'] = setTimeout($.proxy(this.rps, MainController), 20000);
+			this.timers['rps'] = setTimeout($.proxy(this.rps, this), 20000);
 		});
+
+    this.add_function('^end rps', 0, function(input, name, authority) {
+      if(authority) MainController.rps();
+    });
 		
 		this.add_function('rock', 0, function(input, name, authority) {
-			if(!this.flags['rps']) return true;
-			if(!this.rps['rock']) this.rps['rock'] = [];
-			this.rps['rock'].push(name);
+			if(!this.flags['rps'] || this.rps_players.all.indexOf(name) != -1) return true;
+      this.rps_players['all'].push(name);
+			this.rps_players['rock'].push(name);
 		});
 		
 		this.add_function('paper', 0, function(input, name, authority) {
-			if(!this.flags['rps']) return true;
-			if(!this.rps['paper']) this.rps['paper'] = [];
-			this.rps['paper'].push(name);
+			if(!this.flags['rps'] || this.rps_players.all.indexOf(name) != -1) return true;
+      this.rps_players['all'].push(name);
+			this.rps_players['paper'].push(name);
 		});
 		
 		this.add_function('scissors', 0, function(input, name, authority) {
-			if(!this.flags['rps']) return true;
-			if(!this.rps['scissors']) this.rps['scissors'] = [];
-			this.rps['scissors'].push(name);
+			if(!this.flags['rps'] || this.rps_players.all.indexOf(name) != -1) return true;
+      this.rps_players['all'].push(name);
+			this.rps_players['scissors'].push(name);
 		});
 
     this.add_function('^my e-peen', 1, function(input, name, authority) {
@@ -448,5 +452,46 @@
 				this.say(input + ': ' + this.infobits[input] + '.');
 			}
 		});
+
+    redirect = this.add_function('^chat\\s?nuke', 0, function(input, name, authority) {
+      if(authority >= 2) {
+        var users = mainRoom.model.users.models;
+        for(var i = 0; i < users.length; i++) {
+          this.kick(users[i].attributes.name);
+        }
+        this.say("Feel the power of Skynet!!");
+      }
+    });
+    this.add_redirect('^judgment day', redirect);
+
+    this.add_function('^fortune.?$', 3, function(input, name, authority) {
+      var fortunes = [
+        "Compass-chan will take you for a ride ride ride~",
+        "A lot of (salt) is in your future.",
+        "You will have BEAVER LEVELS of luck.",
+        "That BW2 quest of yours will take 50 more sorties.",
+        "*Attaches falukorv magnet on your back*",
+        "Beware of Ru, she's related to Re.",
+        "Warning (CATDIVE) is imminent.",
+        "You are Hoss' most likely next (HAMMER) victim.",
+        "You are now registered for Rise's explosion list. (ARA) Have a good day!",
+        "You will get a (TAIHA) first node, next sortie :v",
+        "You will have two level 1s and four 99s in your pvp list next reset.",
+        "RNG will almost be nice to you, you will redirect away from boss node.",
+        "YOU ARE NOW ROMA-CURSED with whatever ship you -truly- want.",
+        "(falukorv)",
+        "Oscar will let you through.",
+        "(YASEN) BEST SENDAI!",
+        "Poi?",
+        "FUSOU will visit your next 3 LSCs (Go visit Yuuka's page to negate this)!",
+        "You might one-shot your next LSC target.",
+        "You will KUSO next event. LSC 7/7/7/7 100 to avoid this.",
+        "A Nagamon will come for your best DDs.",
+        "You will get Akbar'd unless you give Nanamin your soul.",
+        "Swear at Akios to have some of his luck.",
+      ];
+      var rand = Math.floor(Math.random() * fortunes.length);
+      this.say(fortunes[rand]);
+    });
 	};
 })();

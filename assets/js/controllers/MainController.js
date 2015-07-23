@@ -12,7 +12,8 @@
     flags: {
       rps: false,
     },
-    rps: {
+    rps_players: {
+      all: [],
       rock: [],
       paper: [],
       scissors: [],
@@ -33,6 +34,12 @@
     is_regular: function(chat) {
       if(mainRoom.isInitialized && chat.attributes.name != wgUserName && !chat.attributes.isInlineAlert) return true;
       return false;
+    },
+
+    overweight: function(chat, weight) {
+      if(this.get_authority(chat)) return false;
+      if(this.cooldowns[chat.attributes.name] && this.cooldowns[chat.attributes.name].length + weight > 3) return true;
+      else return false;
     },
 
     extract_name(text) {
@@ -90,10 +97,11 @@
     },
 
     select_random_person: function() {
+      var immune = ['Mikomotoko'];
       var users = mainRoom.model.users.models;
 			do {
 				var rand = Math.floor(Math.random() * users.length);
-			} while(users[rand].attributes.name == "Mikomotoko");
+			} while(immune.indexOf(users[rand].attributes.name) != -1);
       return users[rand].attributes.name;
     },
 
@@ -155,11 +163,29 @@
         } else if(command.type == "function") {
           $.proxy(command.execute, this)(command, chat);
         }
+      } else {
+        // Random responses
+        var randomreplies = [
+          'No.', 'Absolutely not.', 'Never.', 'You wish.',
+          'Yes.', 'Definitely.', 'Absolutely.', 'Okay.',
+          'Maybe.', 'I dunno.',
+          'I can\'t tell you that right now.', 'Try asking again later.', '/me refrains from answering.',
+          ':v', '<3', '(amagi)',
+        ];
+        if(!this.overweight(chat, 3)) {
+          this.add_weight(chat, 3);
+          var rand = Math.floor(Math.random() * randomreplies.length);
+          this.say(randomreplies[rand]);
+        }
       }
     },
 
     check_explosions: function(chat) {
       var keywords = {
+        'Akaryuu-565': '\\(tenryuu\\)',
+        'Koai': 'ayuzz',
+        'Arkayda': '\\(yayoi\\)',
+        'JustWastingTime': '\\(poi\\)',
       }
       if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
         for(var i = 0; i < 5; i++) {
@@ -189,16 +215,17 @@
       var hands = ['rock', 'paper', 'scissors'];
       var chosen = Math.floor(Math.random() * hands.length);
       var winner = (chosen + 1) % 3;
-      if(this.rps[hands[winner]].length == 0) {
+      if(this.rps_players[hands[winner]] && this.rps_players[hands[winner]].length == 0) {
         this.say("I chose " + hands[chosen] + "! Nobody won!");
       } else {
-        this.say("I chose " + hands[chosen] + "! Winners: " + this.rps[hands[winner]].join(', ') + ". They gain +1 e-peen points!");
-        for(var i = 0; i < this.rps[hands[winner]].length; i++) {
-          if(!this.epeen[this.rps[hands[winner]][i]]) this.epeen[this.rps[hands[winner]][i]] = 1;
-          else this.epeen[this.rps[hands[winner]][i]] += 1;
+        this.say("I chose " + hands[chosen] + "! Winners: " + this.rps_players[hands[winner]].join(', ') + ". They gain +1 e-peen points!");
+        for(var i = 0; i < this.rps_players[hands[winner]].length; i++) {
+          if(!this.epeen[this.rps_players[hands[winner]][i]]) this.epeen[this.rps_players[hands[winner]][i]] = 1;
+          else this.epeen[this.rps_players[hands[winner]][i]] += 1;
         }
       }
-      this.rps = { rock: [], paper: [], scissors: [] };
+      this.rps_players = { rock: [], paper: [], scissors: [] };
+      this.game_cooldowns.rps = new Date().getTime();
     },
   };
 
