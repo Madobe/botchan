@@ -405,23 +405,38 @@
 			if(!this.flags['rps'] || this.rps_players.all.indexOf(name) != -1) return true;
       this.rps_players['all'].push(name);
 			this.rps_players['rock'].push(name);
+      this.say("Rock: " + this.rps_players['rock'].join(', '));
 		});
 		
 		this.add_function('paper', 0, function(input, name, authority) {
 			if(!this.flags['rps'] || this.rps_players.all.indexOf(name) != -1) return true;
       this.rps_players['all'].push(name);
 			this.rps_players['paper'].push(name);
+      this.say("Paper: " + this.rps_players['paper'].join(', '));
 		});
 		
 		this.add_function('scissors', 0, function(input, name, authority) {
 			if(!this.flags['rps'] || this.rps_players.all.indexOf(name) != -1) return true;
       this.rps_players['all'].push(name);
 			this.rps_players['scissors'].push(name);
+      this.say("Scissors: " + this.rps_players['scissors'].join(', '));
 		});
 
     this.add_function('^my e-peen', 1, function(input, name, authority) {
       var epeen = this.epeen[name] || 0;
       this.say("Your e-peen is " + epeen + " falukorv long!");
+    });
+
+    this.add_function('^e-peen leaders', 1, function(input, name, authority) {
+      var string = "E-peen leaders: ";
+      var sorted = Object.keys(MainController.epeen).sort(function(a, b) { return MainController.epeen[a] - MainController.epeen[b]; })
+      sorted.reverse();
+      for(var i = 0; i < 5; i++) {
+        if(sorted[i] == undefined) break;
+        string += "[" + (i + 1) + "] " + sorted[i] + " (" + MainController.epeen[sorted[i]] + "), ";
+      }
+      string = string.slice(0, -2);
+      this.say(string);
     });
 		
 		this.add_function('(who\'?s|who is) playing', 1, function(input, name, authority) {
@@ -489,6 +504,30 @@
         "A Nagamon will come for your best DDs.",
         "You will get Akbar'd unless you give Nanamin your soul.",
         "Swear at Akios to have some of his luck.",
+        "Want to be RNG besties? Go exceed Nanamin's fleet.",
+        "You will grow up to be an elephant (LADY)",
+        "Many (bucket)s will be used.",
+        "You will last dance for 8 and 1/2 days. More or less.",
+        "Echo already married your shipfu. Unless she's Sakawa.",
+        "Your waifu will have an event-limited CG in the future.",
+        "Stream your runs. Salt is best shared to everyone.",
+        "Bot-chan best grill.",
+        "Gensui was my daddy. Don't ask.",
+        "You will have great fortune*. If you can make a new fortune up.",
+        "(NANODESU)  (NANODESU)  (NANODESU)",
+        "Fortune? I threw that away for you. (IRUJANAI) You have me don't you?",
+        "No. (AMAGI)",
+        "*Your fortune slip turns to ashes as you hold it*  (FUSOU)",
+        "(LOADING)",
+        "OM NOM NOM NOM! Akagi just ate 30k of your bauxite. https://danbooru.donmai.us/posts/1568866",
+        "(screw)s will be wasted at your next attempt.",
+        "(BAIT) MPs are coming!!!",
+        "There is no KanColle Anime.",
+        "Hiei's curry is waiting for you at your office.",
+        "Haruna is NOT Daijobou",
+        "Kirishima needs a new mic to check. She keeps DROPPING them.",
+        "Tea time for Kongou is srs bsns. (DEESU)",
+        "2-4-11 is a form of love too!",
       ];
       var rand = Math.floor(Math.random() * fortunes.length);
       this.say(fortunes[rand]);

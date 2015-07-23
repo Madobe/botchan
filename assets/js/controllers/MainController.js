@@ -52,6 +52,7 @@
     },
 
     remove_trailing(text, remove) {
+      if(text == undefined) return text;
       text = text.split('');
       while(text[0] == remove) { text.shift() }
       text.reverse();
@@ -182,10 +183,12 @@
 
     check_explosions: function(chat) {
       var keywords = {
+        /*
         'Akaryuu-565': '\\(tenryuu\\)',
         'Koai': 'ayuzz',
         'Arkayda': '\\(yayoi\\)',
         'JustWastingTime': '\\(poi\\)',
+        */
       }
       if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
         for(var i = 0; i < 5; i++) {
@@ -224,8 +227,9 @@
           else this.epeen[this.rps_players[hands[winner]][i]] += 1;
         }
       }
-      this.rps_players = { rock: [], paper: [], scissors: [] };
-      this.game_cooldowns.rps = new Date().getTime();
+      this.rps_players = { all: [], rock: [], paper: [], scissors: [] };
+      //this.game_cooldowns.rps = new Date().getTime() + 300000;
+      this.game_cooldowns.rps = 0;
     },
   };
 
