@@ -96,10 +96,10 @@
       var command = this.database.search(chat.attributes.text);
       if(command) {
         if(command.type == "text") {
-          this.add_weight(command.weight);
+          this.add_weight(chat, command.weight);
           this.say(command.message);
         } else if(command.type == "function") {
-          $.proxy(command.message, this)(command, chat);
+          $.proxy(command.execute, this)(command, chat);
         }
       }
     },

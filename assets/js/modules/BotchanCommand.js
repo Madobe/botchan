@@ -23,7 +23,7 @@
   // This is run in the context of MainController
   BotchanCommand.prototype.execute = function(command, chat) {
     if(!command.overweight(this.get_weight(chat))) {
-      this.add_weight(command.weight);
+      this.add_weight(chat, command.weight);
       $.proxy(command.message, this)(this.strip_calls(chat), chat.attributes.name, this.get_authority(chat));
     }
   }
