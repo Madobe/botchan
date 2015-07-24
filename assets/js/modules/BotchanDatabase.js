@@ -377,13 +377,15 @@
 				while(this.players.length > 1) {
 					var rand = Math.floor(Math.random() * this.players.length);
 					this.kick(this.players[rand]);
+          if(!this.epeen[this.players[rand]]) this.epeen[this.players[rand]] = -5;
+          else this.epeen[this.players[rand]] -= 5;
 					this.players.splice(rand, 1);
 				}
 				var winner = this.players.pop();
 				this.cooldowns[winner] = [];
-				this.say(winner + ' is the winner! Their cooldowns have been reset and they have been awarded 1 e-peen point!');
-        if(!this.epeen[winner]) this.epeen[winner] = 1;
-        else this.epeen[winner] += 1;
+				this.say(winner + ' is the winner! Their cooldowns have been reset and they have been awarded 10 e-peen points! All losers lose 5 e-peen points!');
+        if(!this.epeen[winner]) this.epeen[winner] = 10;
+        else this.epeen[winner] += 10;
 				this.game_cooldowns.russian_roulette = new Date().getTime() + 15 * 60000;
 			}
 		});
@@ -484,15 +486,15 @@
         "Compass-chan will take you for a ride ride ride~",
         "A lot of (salt) is in your future.",
         "You will have BEAVER LEVELS of luck.",
-        "That BW2 quest of yours will take 50 more sorties.",
-        "*Attaches falukorv magnet on your back*",
+        "That Bw2 quest of yours will take 50 more sorties.",
+        "/me attaches a falukorv magnet onto your back.",
         "Beware of Ru, she's related to Re.",
         "Warning (CATDIVE) is imminent.",
         "You are Hoss' most likely next (HAMMER) victim.",
         "You are now registered for Rise's explosion list. (ARA) Have a good day!",
         "You will get a (TAIHA) first node, next sortie :v",
         "You will have two level 1s and four 99s in your pvp list next reset.",
-        "RNG will almost be nice to you, you will redirect away from boss node.",
+        "RNG will almost be nice to you, you will redirect away from the boss node.",
         "YOU ARE NOW ROMA-CURSED with whatever ship you -truly- want.",
         "(falukorv)",
         "Oscar will let you through.",
@@ -513,18 +515,18 @@
         "Stream your runs. Salt is best shared to everyone.",
         "Bot-chan best grill.",
         "Gensui was my daddy. Don't ask.",
-        "You will have great fortune*. If you can make a new fortune up.",
-        "(NANODESU)  (NANODESU)  (NANODESU)",
+        "You will have great fortune, if you can make a new fortune up.",
+        "(NANODESU) (NANODESU) (NANODESU)",
         "Fortune? I threw that away for you. (IRUJANAI) You have me don't you?",
         "No. (AMAGI)",
-        "*Your fortune slip turns to ashes as you hold it*  (FUSOU)",
+        "*Your fortune slip turns to ashes as you hold it.*  (FUSOU)",
         "(LOADING)",
         "OM NOM NOM NOM! Akagi just ate 30k of your bauxite. https://danbooru.donmai.us/posts/1568866",
         "(screw)s will be wasted at your next attempt.",
         "(BAIT) MPs are coming!!!",
         "There is no KanColle Anime.",
         "Hiei's curry is waiting for you at your office.",
-        "Haruna is NOT Daijobou",
+        "Haruna is NOT Daijoubu.",
         "Kirishima needs a new mic to check. She keeps DROPPING them.",
         "Tea time for Kongou is srs bsns. (DEESU)",
         "2-4-11 is a form of love too!",

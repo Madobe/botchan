@@ -215,16 +215,26 @@
     rps: function() {
       clearTimeout(this.timers['rps']);
       this.flags['rps'] = false;
-      var hands = ['rock', 'paper', 'scissors'];
+      var hands = ['rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors'];
       var chosen = Math.floor(Math.random() * hands.length);
-      var winner = (chosen + 1) % 3;
+      var winner = (chosen + 1) % 30;
+      var loser = (winner + 1) % 30;
       if(this.rps_players[hands[winner]] && this.rps_players[hands[winner]].length == 0) {
         this.say("I chose " + hands[chosen] + "! Nobody won!");
       } else {
-        this.say("I chose " + hands[chosen] + "! Winners: " + this.rps_players[hands[winner]].join(', ') + ". They gain +1 e-peen points!");
+        this.say("I chose " + hands[chosen] + "! Winners: " + this.rps_players[hands[winner]].join(', ') + ". They gain 1 e-peen point!");
         for(var i = 0; i < this.rps_players[hands[winner]].length; i++) {
           if(!this.epeen[this.rps_players[hands[winner]][i]]) this.epeen[this.rps_players[hands[winner]][i]] = 1;
           else this.epeen[this.rps_players[hands[winner]][i]] += 1;
+        }
+      }
+      if(this.rps_players[hands[loser]] && this.rps_players[hands[loser]].length == 0) {
+        this.say("No losers this round!");
+      } else {
+        this.say("The losers are: " + this.rps_players[hands[loser]].join(', ') + ". They lose 1 e-peen point!");
+        for(var i = 0; i < this.rps_players[hands[loser]].length; i++) {
+          if(!this.epeen[this.rps_players[hands[loser]][i]]) this.epeen[this.rps_players[hands[loser]][i]] = -1;
+          else this.epeen[this.rps_players[hands[loser]][i]] -= 1;
         }
       }
       this.rps_players = { all: [], rock: [], paper: [], scissors: [] };
