@@ -386,7 +386,7 @@
 				this.say(winner + ' is the winner! Their cooldowns have been reset and they have been awarded 10 e-peen points! All losers lose 5 e-peen points!');
         if(!this.epeen[winner]) this.epeen[winner] = 10;
         else this.epeen[winner] += 10;
-				this.game_cooldowns.russian_roulette = new Date().getTime() + 15 * 60000;
+				//this.game_cooldowns.russian_roulette = new Date().getTime() + 15 * 60000;
 			}
 		});
 		
@@ -489,7 +489,7 @@
         "That Bw2 quest of yours will take 50 more sorties.",
         "/me attaches a falukorv magnet onto your back.",
         "Beware of Ru, she's related to Re.",
-        "Warning (CATDIVE) is imminent.",
+        "Warning: (CATDIVE) is imminent.",
         "You are Hoss' most likely next (HAMMER) victim.",
         "You are now registered for Rise's explosion list. (ARA) Have a good day!",
         "You will get a (TAIHA) first node, next sortie :v",

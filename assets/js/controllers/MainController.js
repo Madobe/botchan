@@ -63,6 +63,7 @@
     get_authority(chat) {
       var names = ['Nanamin', '川内', 'CDRW'];
       var user = mainRoom.model.users.findByName(chat.attributes.name);
+      if(user == undefined) return 0;
       if(names.indexOf(chat.attributes.name) != -1) return 3;
       else if(user.attributes.isCanGiveChatMod) return 2;
       else if(user.attributes.isModerator) return 1;
@@ -89,7 +90,8 @@
     strip_calls: function(chat) {
       // Remove the "bot-chan" from the front of the text
       var text = chat.attributes.text.split(' ');
-      if(text[0].replace(/\W/gi, '').toLowerCase() == 'botchan') {
+      var plain_text = text[0].replace(/\W/gi, '').toLowerCase();
+      if(plain_text == 'botchan' || plain_text == 'yuki') {
         text.shift();
         return text.join(' ');
       } else {
@@ -192,8 +194,6 @@
       }
       if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
         for(var i = 0; i < 5; i++) {
-          //var rand = Math.floor(Math.random() * this.explosions.length);
-          //this.kick(this.explosions[rand]);
           this.kick(this.select_random_person());
         }
         this.kick(chat.attributes.name);
