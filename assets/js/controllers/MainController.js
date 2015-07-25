@@ -198,8 +198,8 @@
           */
           this.kick(this.select_random_person());
         }
-        this.kick(chat.attributes.name);
         this.say(chat.attributes.name + "'s explosion has claimed a few lives.");
+        this.kick(chat.attributes.name);
       }
     },
     
