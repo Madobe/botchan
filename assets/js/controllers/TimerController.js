@@ -11,6 +11,7 @@
     timers: [],
 
     ticks_from_now: function(func, time, recurring) {
+      time += new Date().getTime();
       var timer = new BotchanTimer(func, time, recurring);
       this.timers.push(timer);
       return timer;
@@ -18,7 +19,7 @@
 
     // For adding a timer relative to the current time
     set_from_now: function(func, seconds, recurring) {
-      var time = new Date().getTime() + seconds * 1000;
+      var time = seconds * 1000;
       return this.ticks_from_now(func, time, recurring);
     },
 
@@ -30,7 +31,7 @@
       date.setHours(time[0]);
       date.setMinutes(time[1]);
       date.setSeconds(time[2]);
-      return this.ticks_from_now(func, date.getTime(), recurring);
+      return this.ticks_from_now(func, date.getTime() - new Date(), recurring);
     },
 
     garbage_collect: function(object) {

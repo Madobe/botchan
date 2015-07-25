@@ -20,8 +20,7 @@
     clearTimeout(this.timer);
     this.func.call();
     if(this.recurring) {
-      this.time += 1000 * 60 * 60 * 24;
-      setInterval(this.func, 1000 * 60 * 60 * 24);
+      this.timer = setInterval(this.func, this.recurring);
       this.is_interval = true;
     } else {
       TimerController.garbage_collect(this);
