@@ -10,9 +10,10 @@
   $(document).on('ready', function() {
     loadScript('assets/js/controllers/ConfigController.js');
     loadScript('assets/js/controllers/DataController.js');
-    loadScript('assets/js/controllers/TimerController.js');
     loadScript('assets/js/modules/BotchanCommand.js');
     loadScript('assets/js/modules/BotchanDatabase.js');
+    loadScript('assets/js/modules/BotchanTimer.js');
+    loadScript('assets/js/controllers/TimerController.js');
     loadScript('assets/js/controllers/MainController.js');
   });
 })();

@@ -20,9 +20,10 @@
   "web_accessible_resources": [
     "assets/js/controllers/ConfigController.js",
     "assets/js/controllers/DataController.js",
-    "assets/js/controllers/TimerController.js",
     "assets/js/modules/BotchanCommand.js",
     "assets/js/modules/BotchanDatabase.js",
+    "assets/js/modules/BotchanTimer.js",
+    "assets/js/controllers/TimerController.js",
     "assets/js/controllers/MainController.js"
   ],
   "content_scripts": [

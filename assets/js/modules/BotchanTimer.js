@@ -13,7 +13,7 @@
     this.time = time;
     this.recurring = recurring;
     this.is_interval = false;
-    this.timer = setTimeout(this.run, this.time - new Date());
+    this.timer = setTimeout($.proxy(this.run, this), this.time - new Date());
   };
 
   BotchanTimer.prototype.run = function() {
@@ -46,7 +46,8 @@
     remaining %= 60;
     if(minutes < 10) minutes = "0" + minutes;
 
-    if(remaining < 10) remaining = "0" + remaining;
+    if(remaining < 10) remaining = "0" + Math.floor(remaining);
+    else remaining = Math.floor(remaining);
 
     return hours + ":" + minutes + ":" + remaining;
   };

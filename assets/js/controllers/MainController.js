@@ -237,7 +237,7 @@
         this.say("The losers are: " + this.rps_players[loser].join(', ') + ". They lose 1 e-peen point!");
         for(var i = 0; i < this.rps_players[loser].length; i++) {
           var username = this.rps_players[loser][i];
-          DataController.epeen[username] = (DataController.epeen[username] || 0) + 1;
+          DataController.epeen[username] = (DataController.epeen[username] || 0) - 1;
         }
       }
       this.rps_players = { all: [], rock: [], paper: [], scissors: [] };

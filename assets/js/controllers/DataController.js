@@ -36,4 +36,6 @@
       $.extend(this, this.defaults(), JSON.parse(localStorage.botchan_data));
     },
   };
+
+  DataController.load();
 })();
