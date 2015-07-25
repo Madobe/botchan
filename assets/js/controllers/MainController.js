@@ -1,14 +1,17 @@
+/*
+ * Main Controller
+ * 
+ * The main controller is meant to handle the incoming chat messages and make the calls which pass
+ * off the call to another object which will then do the specific handling. It also holds most of
+ * the runtime variables as properties.
+ */
+
 (function() {
   "use strict";
 
   window.MainController = {
     received_welcome: false,
     database: false,
-    cooldowns: {},
-    game_cooldowns: {
-      russian_roulette: 0,
-      rps: 0,
-    },
     flags: {
       rps: false,
     },
@@ -19,12 +22,7 @@
       scissors: [],
     },
     timers: {},
-    epeen: {},
-    links: [],
-    silence: 0,
-    explosions: ['Akios'],
     players: [],
-    infobits: {},
 
     is_inline: function(chat) {
       if(chat.attributes.isInlineAlert && chat.attributes.text.indexOf('has joined the chat.') != -1) return true;
@@ -38,7 +36,7 @@
 
     overweight: function(chat, weight) {
       if(this.get_authority(chat)) return false;
-      if(this.cooldowns[chat.attributes.name] && this.cooldowns[chat.attributes.name].length + weight > 3) return true;
+      if(DataController.cooldowns[chat.attributes.name] && DataController.cooldowns[chat.attributes.name].length + weight > 3) return true;
       else return false;
     },
 
@@ -71,19 +69,19 @@
     },
 
     get_weight(chat) {
-      if(this.cooldowns[chat.attributes.name]) {
-        return this.cooldowns[chat.attributes.name].length;
+      if(DataController.cooldowns[chat.attributes.name]) {
+        return DataController.cooldowns[chat.attributes.name].length;
       } else {
-        this.cooldowns[chat.attributes.name] = [];
+        DataController.cooldowns[chat.attributes.name] = [];
         return 0;
       }
     },
 
     add_weight(chat, weight) {
-      if(!this.cooldowns[chat.attributes.name]) this.cooldowns[chat.attributes.name] = [];
+      if(!DataController.cooldowns[chat.attributes.name]) DataController.cooldowns[chat.attributes.name] = [];
       var time = new Date().getTime();
       for(var i = 0; i < weight; i++) {
-        this.cooldowns[chat.attributes.name].push(time);
+        DataController.cooldowns[chat.attributes.name].push(time);
       }
     },
 
@@ -154,7 +152,7 @@
     check_links: function(chat) {
       var regex = /.*(https?[^\s]+).*/gi;
       var match = regex.exec(chat.attributes.text);
-      if(null != match) this.links.push(match[1]);
+      if(null != match) DataController.links.push(match[1]);
     },
 
     regular: function(chat) {
@@ -194,6 +192,10 @@
       }
       if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
         for(var i = 0; i < 5; i++) {
+          /*
+          var rand = Math.floor(Math.random() * DataController.explosions.length);
+          this.kick(DataController.explosions[rand]);
+          */
           this.kick(this.select_random_person());
         }
         this.kick(chat.attributes.name);
@@ -217,29 +219,30 @@
       this.flags['rps'] = false;
       var hands = ['rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors', 'rock', 'paper', 'scissors'];
       var chosen = Math.floor(Math.random() * hands.length);
-      var winner = (chosen + 1) % 30;
-      var loser = (winner + 1) % 30;
-      if(this.rps_players[hands[winner]] && this.rps_players[hands[winner]].length == 0) {
-        this.say("I chose " + hands[chosen] + "! Nobody won!");
+      var winner = hands[(chosen + 1) % 30];
+      var loser = hands[(chosen + 2) % 30];
+      chosen = hands[chosen];
+      if(this.rps_players[winner] && this.rps_players[winner].length == 0) {
+        this.say("I chose " + chosen + "! Nobody won!");
       } else {
-        this.say("I chose " + hands[chosen] + "! Winners: " + this.rps_players[hands[winner]].join(', ') + ". They gain 1 e-peen point!");
-        for(var i = 0; i < this.rps_players[hands[winner]].length; i++) {
-          if(!this.epeen[this.rps_players[hands[winner]][i]]) this.epeen[this.rps_players[hands[winner]][i]] = 1;
-          else this.epeen[this.rps_players[hands[winner]][i]] += 1;
+        this.say("I chose " + chosen + "! Winners: " + this.rps_players[winner].join(', ') + ". They gain 1 e-peen point!");
+        for(var i = 0; i < this.rps_players[winner].length; i++) {
+          var username = this.rps_players[winner][i];
+          DataController.epeen[username] = (DataController.epeen[username] || 0) + 1;
         }
       }
-      if(this.rps_players[hands[loser]] && this.rps_players[hands[loser]].length == 0) {
+      if(this.rps_players[loser] && this.rps_players[loser].length == 0) {
         this.say("No losers this round!");
       } else {
-        this.say("The losers are: " + this.rps_players[hands[loser]].join(', ') + ". They lose 1 e-peen point!");
-        for(var i = 0; i < this.rps_players[hands[loser]].length; i++) {
-          if(!this.epeen[this.rps_players[hands[loser]][i]]) this.epeen[this.rps_players[hands[loser]][i]] = -1;
-          else this.epeen[this.rps_players[hands[loser]][i]] -= 1;
+        this.say("The losers are: " + this.rps_players[loser].join(', ') + ". They lose 1 e-peen point!");
+        for(var i = 0; i < this.rps_players[loser].length; i++) {
+          var username = this.rps_players[loser][i];
+          DataController.epeen[username] = (DataController.epeen[username] || 0) + 1;
         }
       }
       this.rps_players = { all: [], rock: [], paper: [], scissors: [] };
-      //this.game_cooldowns.rps = new Date().getTime() + 300000;
-      this.game_cooldowns.rps = 0;
+      //DataController.game_cooldowns.rps = new Date().getTime() + 300000;
+      DataController.game_cooldowns.rps = 0;
     },
   };
 

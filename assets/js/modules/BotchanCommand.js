@@ -1,3 +1,11 @@
+/*
+ * Bot-chan Command
+ *
+ * Each instance of this object is a single command which comes with methods to streamline its
+ * usage. It can come in three types: "text", "function" and "redirect". All three have different
+ * behaviors.
+ */
+
 (function() {
   "use strict";
 

@@ -1,3 +1,10 @@
+/*
+ * Bot-chan Database
+ *
+ * This is meant to section off the declaration and handling of a collection of commands off to a
+ * database. It provides functions for adding to it as well as searching it.
+ */
+
 (function() {
   "use strict";
 
@@ -178,7 +185,7 @@
 		this.add_redirect('^choose', redirect);
 		
 		redirect = this.add_function('^latest links', 3, function(input, name, authority) {
-			var latest_links = this.links.slice(-5);
+			var latest_links = DataController.links.slice(-5);
 			this.say('Latest links (WARNING: May contain NSFW links):\n' + latest_links.join('\n'));
 		});
 		this.add_redirect('^recent links', redirect);
@@ -201,13 +208,13 @@
 						mainRoom.baseOpenPrivateRoom(data, true);
 						mainRoom.showRoom(data.get('roomId'));
 						mainRoom.chats.privates[data.get('roomId')].init();
-						var chatEntry = new models.ChatEntry({roomId: data.get('roomId'), name: wgUserName, text: 'All links stored (WARNING: May contain NSFW links):\n' + this.links.all.join('\n')});
+						var chatEntry = new models.ChatEntry({roomId: data.get('roomId'), name: wgUserName, text: 'All links stored (WARNING: May contain NSFW links):\n' + DataController.links.all.join('\n')});
 						mainRoom.chats.privates[data.get('roomId')].socket.send(chatEntry.xport());
 					}, this)
 				});
 			} else {
 				var privateRoomId = mainRoom.model.privateUsers.findByName(name).attributes.roomId;
-				var chatEntry = new models.ChatEntry({roomId: privateRoomId, name: wgUserName, text: 'All links stored (WARNING: May contain NSFW links):\n' + this.links.all.join('\n')});
+				var chatEntry = new models.ChatEntry({roomId: privateRoomId, name: wgUserName, text: 'All links stored (WARNING: May contain NSFW links):\n' + DataController.links.all.join('\n')});
 				mainRoom.chats.privates[privateRoomId].socket.send(chatEntry.xport());
 			}
 		});
@@ -254,7 +261,7 @@
 		
 		this.add_function('^reset games', 0, function(input, name, authority) {
 			if(authority == 3) {
-				this.game_cooldowns = {};
+				DataController.game_cooldowns = {};
         this.flags.rps = false;
         this.rps_players = { all: [], rock: [], paper: [], scissors: [] };
         this.timers = {};
@@ -264,7 +271,7 @@
 		
 		redirect = this.add_function('^reset all', 0, function(input, name, authority) {
 			if(authority == 3) {
-				this.cooldowns = [];
+				DataController.cooldowns = [];
 				this.say('All cooldowns reset!');
 			}
 		});
@@ -272,28 +279,28 @@
 		
 		this.add_function('^reset', 0, function(input, name, authority) {
 			if(authority == 3) {
-				this.cooldowns[this.remove_trailing(input, '.')] = [];
+				DataController.cooldowns[this.remove_trailing(input, '.')] = [];
 				this.say('Cooldowns reset for ' + this.remove_trailing(input, '.') + '!');
 			}
 		});
 		
 		this.add_function('^silence left', 0, function(input, name, authority) {
       if(authority) {
-        if(!this.silence) this.silence = 0;
-        this.say(parseInt((this.silence - new Date().getTime()) / 60000) + ' minutes remaining.');
+        if(!DataController.silence) DataController.silence = 0;
+        this.say(parseInt((DataController.silence - new Date().getTime()) / 60000) + ' minutes remaining.');
       }
 		});
 		
 		this.add_function('^silence', 0, function(input, name, authority) {
 			if(authority) {
-				this.silence = new Date().getTime() + (parseInt(input) * 60000);
+				DataController.silence = new Date().getTime() + (parseInt(input) * 60000);
 			}
 		});
 		
 		this.add_function('^add explosion', 0, function(input, name, authority) {
 			if(authority) {
 				input = this.remove_trailing(input.substr(10), '.');
-				this.explosions.push(input.toString());
+				DataController.explosions.push(input.toString());
 				this.say(input + ' has been added to the list of explosion targets!');
 			}
 		});
@@ -301,11 +308,11 @@
 		this.add_function('^remove explosion', 0, function(input, name, authority) {
 			if(authority) {
 				input = this.remove_trailing(input.substr(10), '.');
-				var index = this.explosions.indexOf(input);
+				var index = DataController.explosions.indexOf(input);
 				if(input == 'Akios') {
 					this.say('Akios can\'t be removed from the list.');
 				} else if(index != -1) {
-					this.explosions.splice(index, 1);
+					DataController.explosions.splice(index, 1);
 					this.say(input + ' has been removed from the list of explosion targets!');
 				} else {
 					this.say(input + ' wasn\'t in the list!');
@@ -315,13 +322,13 @@
 		
 		this.add_function('^list explosion', 0, function(input, name, authority) {
 			if(authority) {
-				this.say('Current possible targets: ' + this.explosions.join(', '));
+				this.say('Current possible targets: ' + DataController.explosions.join(', '));
 			}
 		});
 		
 		this.add_function('^clear explosion', 0, function(input, name, authority) {
 			if(authority) {
-				this.explosions = ['Akios'];
+				DataController.explosions = ['Akios'];
 				this.say('Explosion list reset!');
 			}
 		});
@@ -353,22 +360,22 @@
 				var loser = this.players[rand];
 				this.kick(loser);
 				if(loser != name) {
-					if(!this.cooldowns[loser]) this.cooldowns[loser] = [];
+					if(!DataController.cooldowns[loser]) DataController.cooldowns[loser] = [];
 					for(var i = 0; i < 2; i++) {
-						this.cooldowns[loser].push(new Date().getTime() + 15 * 60000);
+						DataController.cooldowns[loser].push(new Date().getTime() + 15 * 60000);
 					}
 				}
-				if(!this.cooldowns[name]) this.cooldowns[name] = [];
+				if(!DataController.cooldowns[name]) DataController.cooldowns[name] = [];
 				for(var i = 0; i < 2; i++) {
-					this.cooldowns[name].push(new Date().getTime() + 15 * 60000);
+					DataController.cooldowns[name].push(new Date().getTime() + 15 * 60000);
 				}
 				this.players.splice(rand, 1);
 			}
 		});
 		
 		this.add_function('^reverse roulette', 0, function(input, name, authority) {
-			if(!this.game_cooldowns.russian_roulette) this.game_cooldowns.russian_roulette = 0;
-			if(this.game_cooldowns.russian_roulette - new Date().getTime() > 0) return true;
+			if(!DataController.game_cooldowns.reverse_roulette) DataController.game_cooldowns.reverse_roulette = 0;
+			if(DataController.game_cooldowns.reverse_roulette - new Date().getTime() > 0) return true;
 			if(this.players.indexOf(name) == -1) return true;
 			
 			if(this.players.length < 2) {
@@ -377,21 +384,19 @@
 				while(this.players.length > 1) {
 					var rand = Math.floor(Math.random() * this.players.length);
 					this.kick(this.players[rand]);
-          if(!this.epeen[this.players[rand]]) this.epeen[this.players[rand]] = -5;
-          else this.epeen[this.players[rand]] -= 5;
+          DataController.epeen[this.players[rand]] = (DataController.epeen[this.players[rand]] || 0) - 5;
 					this.players.splice(rand, 1);
 				}
 				var winner = this.players.pop();
-				this.cooldowns[winner] = [];
+				DataController.cooldowns[winner] = [];
+        DataController.epeen[winner] = (DataController.epeen[winner] || 0) + 10;
 				this.say(winner + ' is the winner! Their cooldowns have been reset and they have been awarded 10 e-peen points! All losers lose 5 e-peen points!');
-        if(!this.epeen[winner]) this.epeen[winner] = 10;
-        else this.epeen[winner] += 10;
-				//this.game_cooldowns.russian_roulette = new Date().getTime() + 15 * 60000;
+				//DataController.game_cooldowns.reverse_roulette = new Date().getTime() + 15 * 60000;
 			}
 		});
 		
 		this.add_function('^rps', 0, function(input, name, authority) {
-			if(this.game_cooldowns.rps - new Date().getTime() > 0) return true;
+			if(DataController.game_cooldowns.rps - new Date().getTime() > 0) return true;
 			if(this.flags['rps']) return true;
 			
 			this.say('Rock, Paper, Scissors is starting! Say "rock", "paper", or "scissors" to me to play!');
@@ -425,17 +430,17 @@
 		});
 
     this.add_function('^my e-peen', 1, function(input, name, authority) {
-      var epeen = this.epeen[name] || 0;
+      var epeen = DataController.epeen[name] || 0;
       this.say("Your e-peen is " + epeen + " falukorv long!");
     });
 
     this.add_function('^e-peen leaders', 1, function(input, name, authority) {
       var string = "E-peen leaders: ";
-      var sorted = Object.keys(MainController.epeen).sort(function(a, b) { return MainController.epeen[a] - MainController.epeen[b]; })
+      var sorted = Object.keys(DataController.epeen).sort(function(a, b) { return DataController.epeen[a] - DataController.epeen[b]; })
       sorted.reverse();
       for(var i = 0; i < 5; i++) {
         if(sorted[i] == undefined) break;
-        string += "[" + (i + 1) + "] " + sorted[i] + " (" + MainController.epeen[sorted[i]] + "), ";
+        string += "[" + (i + 1) + "] " + sorted[i] + " (" + DataController.epeen[sorted[i]] + "), ";
       }
       string = string.slice(0, -2);
       this.say(string);
@@ -459,14 +464,14 @@
 		
 		this.add_function('^register', 0, function(input, name, authority) {
 			input = input.split(' = ');
-			this.infobits[input[0]] = this.remove_trailing(input[1], '.');
+			DataController.infobits[input[0]] = this.remove_trailing(input[1], '.');
 			this.say('"' + input[0] + '" has been registered with value "' + input[1] + '".');
 		});
 		
 		this.add_function('^recall', 0, function(input, name, authority) {
 			input = this.remove_trailing(input, '.');
-			if(this.infobits[input] != undefined) {
-				this.say(input + ': ' + this.infobits[input] + '.');
+			if(DataController.infobits[input] != undefined) {
+				this.say(input + ': ' + DataController.infobits[input] + '.');
 			}
 		});
 
