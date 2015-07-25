@@ -39,4 +39,8 @@
       if(index != -1) this.timers.splice(index, 1);
     },
   };
+
+  TimerController.set_at_time(function() { MainController.say("PvP will reset in 30 minutes!"); }, "10:30:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say("PvP will reset in 30 minutes!"); }, "22:30:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say("Quests will reset in 30 minutes!"); }, "11:30:00", 1000 * 60 * 60 * 24);
 })();
