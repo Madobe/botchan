@@ -31,7 +31,9 @@
       date.setHours(time[0]);
       date.setMinutes(time[1]);
       date.setSeconds(time[2]);
-      return this.ticks_from_now(func, date.getTime() - new Date(), recurring);
+      if(date.getTime() - new Date().getTime() < 0) date = date.getTime() + 1000 * 60 * 60 * 24;
+      else date = date.getTime();
+      return this.ticks_from_now(func, date - new Date().getTime(), recurring);
     },
 
     garbage_collect: function(object) {

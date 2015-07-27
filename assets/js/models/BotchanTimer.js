@@ -13,13 +13,14 @@
     this.time = time;
     this.recurring = recurring;
     this.is_interval = false;
-    this.timer = setTimeout($.proxy(this.run, this), this.time - new Date());
+    this.timer = setTimeout($.proxy(this.run, this), this.time - new Date().getTime());
   };
 
   BotchanTimer.prototype.run = function() {
     clearTimeout(this.timer);
     this.func.call();
     if(this.recurring) {
+      this.time = this.recurring + new Date().getTime();
       this.timer = setInterval(this.func, this.recurring);
       this.is_interval = true;
     } else {
@@ -34,7 +35,7 @@
   };
 
   BotchanTimer.prototype.remaining = function() {
-    var remaining = this.time - new Date();
+    var remaining = this.time - new Date().getTime();
     remaining /= 1000;
 
     var hours = Math.floor(remaining / 3600);

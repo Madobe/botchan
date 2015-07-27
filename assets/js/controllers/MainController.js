@@ -124,7 +124,7 @@
           $.proxy(this.add_stars, mainRoom.viewDiscussion)(chat);
 
           chat.attributes.text = this.strip_calls(chat);
-          if(chat.attributes.text) {
+          if(chat.attributes.text || chat.attributes.text === '') {
             this.regular(chat);
           }
         }
@@ -136,9 +136,9 @@
 			for(var i in this.model.users.models) {
 				if(this.model.users.models[i].attributes.name == chat.attributes.name) {
 					if(this.model.users.models[i].attributes.isCanGiveChatMod) {
-						icon = ' <img class="stafficon" src="http://img1.wikia.nocookie.net/__cb20150611191751/kancolle/images/5/58/Icon-admin.png">';
+						icon = ConfigController.admin_icon;
 					} else if(this.model.users.models[i].attributes.isModerator) {
-						icon = ' <img class="modicon" src="http://images2.wikia.nocookie.net/monchbox/images/6/6b/Icon-chatmod.png">';
+						icon = ConfigController.mod_icon;
 					}
 					break;
 				}
@@ -166,17 +166,10 @@
         }
       } else {
         // Random responses
-        var randomreplies = [
-          'No.', 'Absolutely not.', 'Never.', 'You wish.',
-          'Yes.', 'Definitely.', 'Absolutely.', 'Okay.',
-          'Maybe.', 'I dunno.',
-          'I can\'t tell you that right now.', 'Try asking again later.', '/me refrains from answering.',
-          ':v', '<3', '(amagi)',
-        ];
         if(!this.overweight(chat, 3)) {
           this.add_weight(chat, 3);
-          var rand = Math.floor(Math.random() * randomreplies.length);
-          this.say(randomreplies[rand]);
+          var rand = Math.floor(Math.random() * ConfigController.random_replies.length);
+          this.say(ConfigController.random_replies[rand]);
         }
       }
     },
@@ -225,7 +218,7 @@
       if(this.rps_players[winner] && this.rps_players[winner].length == 0) {
         this.say("I chose " + chosen + "! Nobody won!");
       } else {
-        this.say("I chose " + chosen + "! Winners: " + this.rps_players[winner].join(', ') + ". They gain 1 e-peen point!");
+        this.say("I chose " + chosen + "! Winners: " + this.rps_players[winner].join(', ') + ". They gain " + ConfigController.rps_win_points + " e-peen point!");
         for(var i = 0; i < this.rps_players[winner].length; i++) {
           var username = this.rps_players[winner][i];
           DataController.epeen[username] = (DataController.epeen[username] || 0) + 1;
@@ -234,15 +227,14 @@
       if(this.rps_players[loser] && this.rps_players[loser].length == 0) {
         this.say("No losers this round!");
       } else {
-        this.say("The losers are: " + this.rps_players[loser].join(', ') + ". They lose 1 e-peen point!");
+        this.say("The losers are: " + this.rps_players[loser].join(', ') + ". They lose " + ConfigController.rps_lose_points + " e-peen point!");
         for(var i = 0; i < this.rps_players[loser].length; i++) {
           var username = this.rps_players[loser][i];
           DataController.epeen[username] = (DataController.epeen[username] || 0) - 1;
         }
       }
       this.rps_players = { all: [], rock: [], paper: [], scissors: [] };
-      //DataController.game_cooldowns.rps = new Date().getTime() + 300000;
-      DataController.game_cooldowns.rps = 0;
+      DataController.game_cooldowns.rps = new Date().getTime() + ConfigController.rps_cooldown;
     },
   };
 

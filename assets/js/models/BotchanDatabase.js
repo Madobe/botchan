@@ -51,7 +51,6 @@
     var redirect;
 
     this.entries = [];
-    this.add_text('^test.$', 0, "Poi.");
     this.add_text('^$', 3, 'Yup?');
     this.add_text('^o$', 3, 'o7');
     this.add_text('^o7$', 3, 'o/');
@@ -384,14 +383,14 @@
 				while(this.players.length > 1) {
 					var rand = Math.floor(Math.random() * this.players.length);
 					this.kick(this.players[rand]);
-          DataController.epeen[this.players[rand]] = (DataController.epeen[this.players[rand]] || 0) - 5;
+          DataController.epeen[this.players[rand]] = (DataController.epeen[this.players[rand]] || 0) - ConfigController.rr_lose_points;
 					this.players.splice(rand, 1);
 				}
 				var winner = this.players.pop();
 				DataController.cooldowns[winner] = [];
-        DataController.epeen[winner] = (DataController.epeen[winner] || 0) + 10;
-				this.say(winner + ' is the winner! Their cooldowns have been reset and they have been awarded 10 e-peen points! All losers lose 5 e-peen points!');
-				//DataController.game_cooldowns.reverse_roulette = new Date().getTime() + 15 * 60000;
+        DataController.epeen[winner] = (DataController.epeen[winner] || 0) + ConfigController.rr_win_points;
+				this.say(winner + ' is the winner! Their cooldowns have been reset and they have been awarded ' + ConfigController.rr_win_points + ' e-peen points! All losers lose ' + ConfigController.rr_lose_points + ' e-peen points!');
+				DataController.game_cooldowns.reverse_roulette = new Date().getTime() + ConfigController.rr_cooldown;
 			}
 		});
 		

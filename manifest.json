@@ -4,25 +4,28 @@
   "name": "Bot-chan Chrome Extension",
   "description": "Basically just an extension because I get lazy to edit things in sometimes.",
   "version": "1.0",
-
+  "devtools_page": "pages/devtools/init.html",
   "browser_action": {
     "default_icon": "assets/images/botchan.png",
     "default_popup": "pages/popup/popup.html"
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "unlimitedStorage"
   ],
   "background": {
     "scripts": [
-      "assets/js/common/jquery-2.1.3.min.js"
+      "assets/js/common/jquery-2.1.3.min.js",
+      "assets/js/background/init.js"
     ]
   },
   "web_accessible_resources": [
+    "assets/js/controllers/CommController.js",
     "assets/js/controllers/ConfigController.js",
     "assets/js/controllers/DataController.js",
-    "assets/js/modules/BotchanCommand.js",
-    "assets/js/modules/BotchanDatabase.js",
-    "assets/js/modules/BotchanTimer.js",
+    "assets/js/models/BotchanCommand.js",
+    "assets/js/models/BotchanDatabase.js",
+    "assets/js/models/BotchanTimer.js",
     "assets/js/controllers/TimerController.js",
     "assets/js/controllers/MainController.js"
   ],

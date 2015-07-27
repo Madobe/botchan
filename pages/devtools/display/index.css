@@ -1,0 +1,17 @@
+body {
+  background: #DFFFFF;
+}
+
+.container {
+}
+
+.container .values {
+  background: white;
+  padding: 15px 20px;
+  border: 1px solid #CCC;
+  border-radius: 20px;
+}
+
+.container .values table tr td:first-child {
+  width: 100px;
+}

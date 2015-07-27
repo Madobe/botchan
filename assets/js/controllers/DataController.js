@@ -27,15 +27,19 @@
 
     save: function() {
       // Saving is done with a copy so we can tweak it without modifying the current one
-      var data = $.extend(true, {}, this);
+      var data = $.extend(true, this.defaults(), this);
       data.links = data.links.slice(-5);
       localStorage.botchan_data = JSON.stringify(data);
     },
 
     load: function() {
-      $.extend(this, this.defaults(), JSON.parse(localStorage.botchan_data));
+      $.extend(this, this.defaults(), JSON.parse(localStorage.botchan_data || {}));
     },
   };
+
+  window.addEventListener('beforeunload', function(e) {
+    DataController.save();
+  });
 
   DataController.load();
 })();

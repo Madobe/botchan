@@ -1,0 +1,19 @@
+[
+  {
+    'header': 'Moderator/Admin Icons',
+    'contents': [
+      {
+        'type'    : 'text',
+        'field'   : 'admin_icon',
+        'name'    : 'Admin Icon',
+        'options' : {}
+      },
+      {
+        'type'    : 'text',
+        'field'   : 'mod_icon',
+        'name'    : 'Moderator Icon',
+        'options' : {}
+      }
+    ]
+  }
+]
