@@ -11,7 +11,32 @@
  */
 
 (function() {
-  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    sendResponse({message: "Test"});
-  });
+  window.BackgroundManager = {
+    listen: function() {
+      var self = this;
+
+      // Listen to the devtools page
+      chrome.runtime.onConnect.addListener(function(port) {
+        self.connection = port;
+
+        // Devtools script -> here
+        port.onMessage.addListener(function(request, sender, sendResponse) {
+          chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, request);
+          });
+        });
+      });
+
+      // Listen for the content script
+      chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+        self.send(request);
+      });
+    },
+
+    send: function(message) {
+      this.connection.postMessage(message);
+    },
+  };
+
+  BackgroundManager.listen();
 })();

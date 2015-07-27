@@ -1,3 +1,10 @@
+/*
+ * Content Script
+ *
+ * This is the initial script that injects all scripts onto the page. It also serves as the gateway
+ * for messages being sent from the injected scripts to the extension (and devtools) and vice versa.
+ */
+
 (function() {
   "use strict";
 
@@ -18,14 +25,17 @@
     loadScript('assets/js/controllers/MainController.js');
   });
 
+  // Injected script -> here -> devtools page
   window.addEventListener('message', function(e) {
     var data = e.data;
-    if(typeof data == 'object' && data.id == 'yuki') {
+    if(typeof data == 'object' && data.id == 'yuki' && data.target == 'extension') {
       console.log("Sending message from content script.");
-      chrome.runtime.sendMessage(data, function(response) {
-        console.log("Testing.");
-        console.log(response);
-      });
+      chrome.runtime.sendMessage(data);
     }
+  });
+
+  // Background page -> here -> injected script
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    window.postMessage($.extend(request, { id: 'yuki', target: 'injected' }), '*');
   });
 })();
