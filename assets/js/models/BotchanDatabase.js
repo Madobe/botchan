@@ -485,7 +485,7 @@
     });
     this.add_redirect('^judgment day', redirect);
 
-    this.add_function('^fortune.?$', 3, function(input, name, authority) {
+    this.add_function('^fortune', 3, function(input, name, authority) {
       var fortunes = [
         "Compass-chan will take you for a ride ride ride~",
         "A lot of (salt) is in your future.",
@@ -504,7 +504,7 @@
         "Oscar will let you through.",
         "(YASEN) BEST SENDAI!",
         "Poi?",
-        "FUSOU will visit your next 3 LSCs (Go visit Yuuka's page to negate this)!",
+        "FUSOU will visit your next 3 LSCs ([[User:Kazami Yuuka|Click here]] to negate this)!",
         "You might one-shot your next LSC target.",
         "You will KUSO next event. LSC 7/7/7/7 100 to avoid this.",
         "A Nagamon will come for your best DDs.",
@@ -518,7 +518,6 @@
         "Your waifu will have an event-limited CG in the future.",
         "Stream your runs. Salt is best shared to everyone.",
         "Bot-chan best grill.",
-        "Gensui was my daddy. Don't ask.",
         "You will have great fortune, if you can make a new fortune up.",
         "(NANODESU) (NANODESU) (NANODESU)",
         "Fortune? I threw that away for you. (IRUJANAI) You have me don't you?",
@@ -537,6 +536,16 @@
       ];
       var rand = Math.floor(Math.random() * fortunes.length);
       this.say(fortunes[rand]);
+    });
+
+    this.add_function('^set personality ', 0, function(input, name, authority) {
+      if(authority == 3) {
+        input = input.split(' ');
+        input.shift();
+        input = this.remove_trailing(input.join(' '), '.').toString();
+        this.say("Personality set to \"" + input + "\"!");
+        ConfigController.personality = input;
+      }
     });
 	};
 })();

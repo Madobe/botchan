@@ -21,6 +21,7 @@
     loadScript('assets/js/models/BotchanCommand.js');
     loadScript('assets/js/models/BotchanDatabase.js');
     loadScript('assets/js/models/BotchanTimer.js');
+    loadScript('assets/js/controllers/PersonalityController.js');
     loadScript('assets/js/controllers/TimerController.js');
     loadScript('assets/js/controllers/MainController.js');
   });
@@ -29,7 +30,6 @@
   window.addEventListener('message', function(e) {
     var data = e.data;
     if(typeof data == 'object' && data.id == 'yuki' && data.target == 'extension') {
-      console.log("Sending message from content script.");
       chrome.runtime.sendMessage(data);
     }
   });

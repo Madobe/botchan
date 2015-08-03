@@ -22,8 +22,17 @@
         if(typeof data == 'object' && data.id == 'yuki' && data.target == 'injected') {
           if(data.action == 'config') {
             // Send a copy so ConfigController doesn't gain "id" and "target"
-            var config = JSON.parse(JSON.stringify(ConfigController));
-            self.send(config);
+            var contents = JSON.parse(JSON.stringify(ConfigController));
+            self.send({ action: 'config', contents: contents });
+          } else if(data.action == 'data') {
+            var contents = JSON.parse(JSON.stringify(DataController));
+            self.send({ action: 'data', contents: contents });
+          } else if(data.action == 'update_config') {
+            console.log("Received message to update config.");
+            console.log(data);
+          } else if(data.action == 'update_data') {
+            console.log("Received message to update data.");
+            console.log(data);
           }
         }
       });

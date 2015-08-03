@@ -2,7 +2,12 @@ body {
   background: #DFFFFF;
 }
 
-.container {
+#templates {
+  display: none;
+}
+
+.clear {
+  clear: both;
 }
 
 .container .values {
@@ -12,6 +17,29 @@ body {
   border-radius: 20px;
 }
 
-.container .values table tr td:first-child {
-  width: 100px;
+.container h3 {
+  width: 100%;
+}
+
+.container .values form input {
+  width: 100%;
+  margin: 3px 0 5px 0;
+}
+
+.container .values form label.regular_label {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.container .values form label.array_label {
+  float: left;
+  height: 25px;
+  width: 15%;
+  line-height: 25px;
+  overflow-x: hidden;
+}
+
+.container .values form input.array_text_box {
+  float: right;
+  width: 80%;
 }

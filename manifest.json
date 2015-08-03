@@ -27,6 +27,7 @@
     "assets/js/models/BotchanCommand.js",
     "assets/js/models/BotchanDatabase.js",
     "assets/js/models/BotchanTimer.js",
+    "assets/js/controllers/PersonalityController.js",
     "assets/js/controllers/TimerController.js",
     "assets/js/controllers/MainController.js"
   ],
