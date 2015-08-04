@@ -538,7 +538,7 @@
       this.say(fortunes[rand]);
     });
 
-    this.add_function('^set personality ', 0, function(input, name, authority) {
+    redirect = this.add_function('^set personality ', 0, function(input, name, authority) {
       if(authority == 3) {
         input = input.split(' ');
         input.shift();
@@ -547,5 +547,6 @@
         ConfigController.personality = input;
       }
     });
+    this.add_redirect('^load personality', redirect);
 	};
 })();

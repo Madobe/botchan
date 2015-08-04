@@ -35,7 +35,7 @@
           '0100': "0100.",
           '0200': "0200.",
           '0300': "0300.",
-          '0400': "0400.",
+          '0400': "0400. New targets have been confirmed for termination.",
           '0500': "0500.",
           '0600': "0600.",
           '0700': "0700.",
@@ -190,13 +190,13 @@
           '0000': "Admiral, it's 0000 JST. You can tell by the sound of some idiot screaming \"Yasen, yasen!\" outside.",
           '0100': "It's not good to stay up this late admiral. It's already 0100 JST. Hmm...did you hear someone say hyahaa?",
           '0200': "Some night battle freak is still shouting at 0200 JST... Sure is lively here...",
-          '0300': "Its 0300 JST admiral. Someone outside is crying for Roma...not that I know what that is...",
+          '0300': "It's 0300 JST admiral. Someone outside is crying for Roma...not that I know what that is...",
           '0400': "Admiral, it's already 0400 JST. Four...like, you know, 4chan... I wonder if some fool posted their API link there today...",
           '0500': "Good morning, Admiral, it's 0500 JST. I see you are working hard as always. Well, like they say, the early admiral catches the...well, something.",
-          '0600': "Hey admiral, I was checking our equipment list and it seems that we have a (blender)... I wonder how that got in here... Oh, by the way, its 0600 JST.",
+          '0600': "Hey admiral, I was checking our equipment list and it seems that we have a (blender)... I wonder how that got in here... Oh, by the way, it's 0600 JST.",
           '0700': "Admiral, it's already 0700 JST. You didn't forget to send expeditions, did you? I wonder where all our bauxite went...",
           '0800': "0800 JST. Admiral, did you have your breakfast already? Hiei and Isokaze are in the kitchen right now; want them to cook you something?",
-          '0900': "Admiral...any second now some British freak will come running in, shouting \"Burning Love\" and make you drink some tea... Ugh, its only 0900 JST, why is it so loud already?",
+          '0900': "Admiral...any second now some British freak will come running in, shouting \"Burning Love\" and make you drink some tea... Ugh, it's only 0900 JST, why is it so loud already?",
           '1000': "Hey, Admiral, I dare you to type in (AMAGI&#41;! Eh, the time? It's 1000 JST.",
           '1100': "Hey it's 1100 JST, admiral... Do you, by any chance, have the sudden urge to roll around and clear runways?",
           '1200': "It's 1200 JST admiral! I hope we have enough to afford a real lunch today. Not that I dislike having instant noodles everyday...",
@@ -211,7 +211,33 @@
           '2100': "It's 2100 JST, why don't we kick a certain talking bird?",
           '2200': "Admiral, it's 2200 JST. Now would be the perfect time to open others' danbooru and tumblr links.",
           '2300': "2300 JST... Hey, Admiral, I'm a bit sleepy, why dont we play a game of roulette?",
-        }
+        },
+        'mochizuki': {
+          '0000': "The time is 0000. Zzzz...",
+          '0100': "The time is 0100. Admiral...",
+          '0200': "The time is 0200. *Yawn* You're still working...? Guess I should start too.",
+          '0300': "0300. Some fleets are challenging us to a practice battle. Well, as long as I don't participate, it's fine.",
+          '0400': "0400. *Sigh* I should still be sleeping at this hour...",
+          '0500': "0500. Admiral, the sun's about to rise. How about taking a break?",
+          '0600': "0600. Overnight expedition fleets are back. Well, I guess secretary duty's better than expeditions...",
+          '0700': "0700. Ah, this? It's instant noodles. Here's yours admiral.",
+          '0800': "0800. Breakfast? You just had it. Instant noodles are so convenient~",
+          '0900': "0900. Admiral, don't neglect your dailies. You go do it so that I could rest for... I-it's nothing.",
+          '1000': "1000. In other words, Hachi. Ah, don't mind me, just a passing thought.",
+          '1100': "1100. Don't worry, I also have lunch prepared. ...What's with that look?",
+          '1200': "1200. You're ordering instead? Well I guess pizza's better than cup ramen.",
+          '1300': "1300. Ah~ A good meal makes me a bit drowzy... But I guess work comes first huh... *sigh*",
+          '1400': "1400. It's gonna get a bit rowdy here with the upcoming practice battle. How bothersome...",
+          '1500': "1500. Eh? I should participate in practice battles? Let the others handle it...",
+          '1600': "1600. Admiral, don't leave your strong fleet for practice. There's plenty of reports here that state so.",
+          '1700': "1700. I know I know, I'll properly make something. Just wait here.",
+          '1800': "1800. Here, I tried making some dinner. Don't worry, Houshou was there to help me.",
+          '1900': "1900. That was a good meal~ I guess I'll go- Eh? Paperwork? Such a bother...",
+          '2000': "2000. Don't forget about your overnight expeditions now.",
+          '2100': "2100... Admiral, I'm getting a bit sleepy...",
+          '2200': "22...00... No more... Let me rest for a bit...",
+          '2300': "The time is 2300. Hourly alarm's all set up. G'night admiral...",
+        },
       };
     },
 
@@ -221,7 +247,7 @@
 
     get_line: function(identifier, personality) {
       if(!personality) personality = ConfigController.personality || 'sendai';
-      return this[personality][identifier];
+      return this[personality][identifier] || this['sendai'][identifier] || 'Line not available.';
     },
   };
 
