@@ -168,8 +168,9 @@
         // Random responses
         if(!this.overweight(chat, 3)) {
           this.add_weight(chat, 3);
-          var rand = Math.floor(Math.random() * ConfigController.random_replies.length);
-          this.say(ConfigController.random_replies[rand]);
+          var replies = PersonalityController.get_line('randoms');
+          var rand = Math.floor(Math.random() * replies.length);
+          this.say(replies[rand]);
         }
       }
     },

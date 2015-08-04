@@ -4,6 +4,34 @@
   window.PersonalityController = {
     entries: function() {
       return {
+        'defaults': {
+          '0000': "0000.",
+          '0100': "0100.",
+          '0200': "0200.",
+          '0300': "0300.",
+          '0400': "0400.",
+          '0500': "0500.",
+          '0600': "0600.",
+          '0700': "0700.",
+          '0800': "0800.",
+          '0900': "0900.",
+          '1000': "1000.",
+          '1100': "1100.",
+          '1200': "1200.",
+          '1300': "1300.",
+          '1400': "1400.",
+          '1500': "1500.",
+          '1600': "1600.",
+          '1700': "1700.",
+          '1800': "1800.",
+          '1900': "1900.",
+          '2000': "2000.",
+          '2100': "2100.",
+          '2200': "2200.",
+          '2300': "2300.",
+
+          'randoms': ['No.', 'Absolutely not.', 'Never.', 'You wish.', 'Yes.', 'Definitely.', 'Absolutely.', 'Okay.', 'Maybe.', 'I dunno.', 'I can\'t tell you that right now.', 'Try asking again later.', '/me refrains from answering.', ':v', '<3', '(amagi)'],
+        },
         'sendai': {
           '0000': "0000! It's midnight! Time for a night battle! (YASEN)",
           '0100': "0100. Our docks are clogged :o That was a harsh night battle...",
@@ -29,6 +57,8 @@
           '2100': "2100. What? You're worried about ammo? Don't worry about it! That's what expedition 2 is for!",
           '2200': "2200. Admiral, please don't try to fight subs at night. No, just don't.",
           '2300': "2300. The moon is beautiful, isn't it? I can't tire of looking at how round it is.",
+
+          'randoms': ['Yeah!', 'Nope.', 'Night battle!', '(yasen)', 'Maybe?', 'No clue.'],
         },
         'skynet': {
           '0000': "0000. A new day. A new conquest.",
@@ -246,8 +276,8 @@
     },
 
     get_line: function(identifier, personality) {
-      if(!personality) personality = ConfigController.personality || 'sendai';
-      return this[personality][identifier] || this['sendai'][identifier] || 'Line not available.';
+      if(!personality) personality = ConfigController.personality || 'defaults';
+      return this[personality][identifier] || this['defaults'][identifier] || 'Line not available.';
     },
   };
 
