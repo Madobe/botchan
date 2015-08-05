@@ -60,24 +60,24 @@
     this.add_text('^beep boop.?$', 3, 'Boop beep.');
     this.add_text('^boop beep.?$', 3, 'Beep boop.');
     this.add_text('^stupid question', 3, '(newsflash) READ THE FOCKIN\' WIKI!');
-    this.add_text('^hi', 3, 'Hello.');
-    this.add_text('^hello', 3, 'Hi.');
-    redirect = this.add_text('^おはよう', 3, 'おはようございます！');
+    this.add_text('^hi', 3, PersonalityController.get_line('hi'));
+    this.add_text('^hello', 3, PersonalityController.get_line('hello'));
+    redirect = this.add_text('^おはよう', 3, PersonalityController.get_line('ohayou'));
     this.add_redirect('^ohayou?', redirect);
-    this.add_text('^good\\s?night', 3, 'Good night!');
-    this.add_text('^bye.?bye', 3, 'Bye~!');
-    this.add_text('^good.?bye', 3, 'さようなら〜');
-    this.add_text('^question$', 3, 'No.');
-    redirect = this.add_text('^may i ask a question', 3, 'Denied.');
+    this.add_text('^good\\s?night', 3, PersonalityController.get_line('good night'));
+    this.add_text('^bye.?bye', 3, PersonalityController.get_line('bye bye'));
+    this.add_text('^good.?bye', 3, PersonalityController.get_line('good bye'));
+    this.add_text('^question.?$', 3, PersonalityController.get_line('question?'));
+    redirect = this.add_text('^may i ask a question', 3, PersonalityController.get_line('may i ask a question'));
     this.add_redirect('^can i ask a question', redirect);
     this.add_text('^what is life', 3, '42.');
     this.add_text('^what is love.?$', 3, 'Baby don\'t hurt me.');
     this.add_text('^(baby\\s)?don\'?t hurt me.?$', 3, 'NO MOAR.');
-    this.add_text('^you suck', 3, 'Not as hard as you.');
-    this.add_text('^give me luck', 3, 'You have lost 20 luck from asking for this. You must now attempt ALL-7 LSC within the next 24 hours.');
-    this.add_text('^can i become chat\\s?mod.?$', 3, 'If you donate $5000 to Nanamin.');
+    this.add_text('^you suck', 3, PersonalityController.get_line('you suck'));
+    this.add_text('^give me luck', 3, PersonalityController.get_line('give me luck'));
+    this.add_text('^can i become (a )?chat\\s?mod.?$', 3, PersonalityController.get_line('can i become chat mod'));
     this.add_text('^fetch', 3, '/me grabs stick.');
-    this.add_text('love me', 3, 'You haven\'t bought enough 700 yen rings.');
+    this.add_text('love me', 3, PersonalityController.get_line('love me'));
     this.add_text('^what version number', 3, 'v. Skynet.');
 
     this.add_text('^jwt.?$', 3, 'Kick it!');
@@ -107,7 +107,7 @@
 
     redirect = this.add_text('^tweets.?$', 0, 'https://twitter.com/kancolle_staff');
     this.add_redirect('^twitter.?$', redirect);
-    this.add_redirect('^(staff|dev)\\s(tweets|twitter).?$', redirect);
+    this.add_redirect('^(staff|dev) (tweets|twitter).?$', redirect);
     this.add_text('^emoticon list.?$', 0, 'http://kancolle.wikia.com/wiki/MediaWiki:Emoticons');
     this.add_text('^kc3 kai.?$', 0, 'http://kancolle.wikia.com/wiki/User_blog:Dragonjet/KC3%E6%94%B9');
     this.add_text('^orel cruising', 1, 'https://www.youtube.com/watch?v=c1-TPCwXV8s');
@@ -157,7 +157,7 @@
     this.add_text('as 6-1|6-1 as', 0, '[6-1] PA:56, AS:126, AS+:252 / H Node: PA:120, AS:270, AS+:540');
     this.add_text('as 6-2|6-2 as', 0, '[6-2] H Node: PA:16, AS:35, AS+:69 / I Node: PA:68, AS:153, AS+:306 / Boss: PA:56, AS:126, AS+:252');
 
-		this.add_text('^who\\sare\\syou', 3, 'Just your friendly neighborhood Bot-chan.');
+		this.add_text('^who are you', 3, PersonalityController.get_line('who are you'));
 
     // ======================================================================
     // == Functions

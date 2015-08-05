@@ -31,7 +31,21 @@
           '2300': "2300.",
 
           'randoms': ['No.', 'Absolutely not.', 'Never.', 'You wish.', 'Yes.', 'Definitely.', 'Absolutely.', 'Okay.', 'Maybe.', 'I dunno.', 'I can\'t tell you that right now.', 'Try asking again later.', '/me refrains from answering.', ':v', '<3', '(amagi)'],
+
           'kick': 'Get rekt!',
+          'hi': 'Hello.',
+          'hello': 'Hi.',
+          'ohayou': 'おはようございます！',
+          'good night': 'Good night!',
+          'bye bye': 'Bye~!',
+          'good bye': 'さようなら〜',
+          'question?': 'No.',
+          'may i ask a question': 'Denied.',
+          'you suck': 'Not as much as you.',
+          'give me luck': 'You have lost 20 luck from asking for this. You must now attempt ALL-7 LSC within the next 24 hours.',
+          'can i become chat mod': 'If you donate $5000 to Nanamin.',
+          'love me': "You haven't bought enough 700 yen rings.",
+          'who are you': 'Just your friendly neighborhood Bot-chan.',
         },
         'sendai': {
           '0000': "0000! It's midnight! Time for a night battle! (YASEN)",
