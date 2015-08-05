@@ -31,6 +31,7 @@
           '2300': "2300.",
 
           'randoms': ['No.', 'Absolutely not.', 'Never.', 'You wish.', 'Yes.', 'Definitely.', 'Absolutely.', 'Okay.', 'Maybe.', 'I dunno.', 'I can\'t tell you that right now.', 'Try asking again later.', '/me refrains from answering.', ':v', '<3', '(amagi)'],
+          'kick': 'Get rekt!',
         },
         'sendai': {
           '0000': "0000! It's midnight! Time for a night battle! (YASEN)",
@@ -59,6 +60,7 @@
           '2300': "2300. The moon is beautiful, isn't it? I can't tire of looking at how round it is.",
 
           'randoms': ['Yeah!', 'Nope.', 'Night battle!', '(yasen)', 'Maybe?', 'No clue.'],
+          'kick': 'やーせーん！',
         },
         'skynet': {
           '0000': "0000. A new day. A new conquest.",
@@ -241,6 +243,9 @@
           '2100': "It's 2100 JST, why don't we kick a certain talking bird?",
           '2200': "Admiral, it's 2200 JST. Now would be the perfect time to open others' danbooru and tumblr links.",
           '2300': "2300 JST... Hey, Admiral, I'm a bit sleepy, why dont we play a game of roulette?",
+
+          'randoms': ["I'm sorry, what? I was fondling Koai's ass.", "Only if it blends.", "No. FITE ME.", "/me avoids the question and rolls around.", "/me kicks Akios.", "Falukorv's the word.", "Obviously potato quality.", "Yessssssssssss, if you wouldn't be so noisy.", "Not now or I'll put you in a third turret explosion list.", '(amagi)'],
+          'kick': 'Stop wasting my time.',
         },
         'mochizuki': {
           '0000': "The time is 0000. Zzzz...",
@@ -252,7 +257,7 @@
           '0600': "0600. Overnight expedition fleets are back. Well, I guess secretary duty's better than expeditions...",
           '0700': "0700. Ah, this? It's instant noodles. Here's yours admiral.",
           '0800': "0800. Breakfast? You just had it. Instant noodles are so convenient~",
-          '0900': "0900. Admiral, don't neglect your dailies. You go do it so that I could rest for... I-it's nothing.",
+          '0900': "0900. Admiral, don't neglect your dailies. You go do it so I can rest for... I-It's nothing.",
           '1000': "1000. In other words, Hachi. Ah, don't mind me, just a passing thought.",
           '1100': "1100. Don't worry, I also have lunch prepared. ...What's with that look?",
           '1200': "1200. You're ordering instead? Well I guess pizza's better than cup ramen.",
@@ -267,6 +272,9 @@
           '2100': "2100... Admiral, I'm getting a bit sleepy...",
           '2200': "22...00... No more... Let me rest for a bit...",
           '2300': "The time is 2300. Hourly alarm's all set up. G'night admiral...",
+
+          'randoms': ['Yep.', 'Nah.', 'Dunno.', '...', 'Whatever...', "Don't ask me...", '...Huh?', "/me doesn't respond.", '/me is fast asleep.', '(amagi)'],
+          'kick': "You're being a bother...",
         },
       };
     },

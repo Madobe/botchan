@@ -232,7 +232,7 @@
         var short = {'JWT': 'JustWastingTime', 'TS': 'TScript'};
         if(short[this.remove_trailing(input, '.')]) input = short[this.remove_trailing(input, '.')];
         input = this.extract_name(input);
-        this.say('Get rekt!');
+        this.say(PersonalityController.get_line('kick'));
         this.kick(input);
       }
 		});
