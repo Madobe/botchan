@@ -4,6 +4,7 @@
   window.PersonalityController = {
     entries: function() {
       return {
+        // By Nanamin
         'defaults': {
           '0000': "0000.",
           '0100': "0100.",
@@ -47,6 +48,7 @@
           'love me': "You haven't bought enough 700 yen rings.",
           'who are you': 'Just your friendly neighborhood Bot-chan.',
         },
+        // By Nanamin
         'sendai': {
           '0000': "0000! It's midnight! Time for a night battle! (YASEN)",
           '0100': "0100. Our docks are clogged :o That was a harsh night battle...",
@@ -73,7 +75,7 @@
           '2200': "2200. Admiral, please don't try to fight subs at night. No, just don't.",
           '2300': "2300. The moon is beautiful, isn't it? I can't tire of looking at how round it is.",
 
-          'randoms': ['Yeah!', 'Nope.', 'Night battle!', '(yasen)', 'Maybe?', 'No clue.'],
+          'randoms': ['Yeah!', "Let's do it!", 'Nope.', 'Night battle!', '(yasen)', 'Maybe?', 'No clue.'],
           'kick': 'やーせーん！',
         },
         'skynet': {
@@ -206,32 +208,37 @@
           '2200': "2200.",
           '2300': "2300.",
         },
+        // By ShadowseerXII
         'imouto': {
-          '0000': "0000!",
-          '0100': "0100.",
-          '0200': "0200.",
-          '0300': "0300!",
-          '0400': "0400!",
-          '0500': "0500!",
-          '0600': "0600!",
-          '0700': "0700.",
-          '0800': "0800.",
-          '0900': "0900.",
-          '1000': "1000.",
-          '1100': "1100.",
-          '1200': "1200.",
-          '1300': "1300.",
-          '1400': "1400.",
-          '1500': "1500!",
-          '1600': "1600.",
-          '1700': "1700.",
-          '1800': "1800.",
-          '1900': "1900.",
-          '2000': "2000.",
-          '2100': "2100.",
-          '2200': "2200.",
-          '2300': "2300.",
+          '0000': "0000 JST. Onii-chaaan, go to sleep already~ I'm sleepy...",
+          '0100': "0100 JST. Onii-cha -- *yawn*... I'm tired... Can I take a nap...?",
+          '0200': "0...2...00 JST...zzz...ah...sorry...I fell asleep...",
+          '0300': "0300 JST...Onii-chan, is it time for PvP? Do you...want some coffee?",
+          '0400': "0400 JST. Was it...good? *giggle* You're welcome, Onii-chan!",
+          '0500': "0500 JST. I'm not sleepy anymore... Hmm... Onii-chan, can I sit by your side...?",
+          '0600': "0600 JST. Waah...the sun is here... Jeez~ I couldnt sleep today... Onii-chan, you meanie *hnf*",
+          '0700': "0700 JST. Breakfast time~ What do you want to eat? I'll make some toast for you, okay, onii-chan?",
+          '0800': "0800 JST! Hehe~ I'm glad it was good. What are you going to do now, onii-chan?",
+          '0900': "0900 JST! Did you send your expeditions already? You didnt forget it, did you, onii-chan?",
+          '1000': "1000 JST! Did you do those daily quests already? I'm bored... Give me attention! >_<",
+          '1100': "1100 JST-desu!... what? You...didn't like it?... Cute!? Hehe~ thanks Onii-chan!",
+          '1200': "1200 JST-desu! It's time for Lunch! Should I cook something, Onii-chan? Omurice it is!...poi!",
+          '1300': "1300 JST-desu! Was it that good-poi?! I'm glad-decchi! I don't think I can eat dessert though-kamo...",
+          '1400': "1400 JST-pyon! Eehh.? Am I overdoing it..? Sorry..Kyaha~☆. Hehe~",
+          '1500': "1500 JST! Did you win all PvPs? That's my Onii-sama! What? Luck? Moo, Onii-sama tara~.. You're so modest...*blush*",
+          '1600': "1600 JST! Onii-chan, How about taking a break..? It's not good to keep playing for such a long time...",
+          '1700': "1700 JST! I told you already! If you get sick it's not my fault! Hunf!",
+          '1800': "1800 JST. Onii-chan, should I start cooking dinner? What do you think of curry for today?.. Ok! It'll be ready soon!",
+          '1900': "1900 JST! Awawa... you didnt need to jump like that to tell me it's good you know? I got it from Hiei's recipe",
+          '2000': "2000 JST! ONII-CHAN WAKE UP! It's okay to take a nap after dinner but it's been 1 hour already!... Onii....chan..?",
+          '2100': "*sniff* *sniff* Are you awake, onii? Sorry! I-I... didnt know ir was so bad.. but you dont need to lie and eat it all, you know! It's 2100 JST!",
+          '2200': "2200 JST. I guess your expeditions are back! By the way Onii, I've seen a ring in your inventary...",
+          '2300': "2300 JST.. Onii, who are you giving that to.?.... No one? Oh.. never mind then.. that's good hehe~",
+
+          'randoms': ['Yep!.', 'No!.', 'Hmm.. how should I answer that?', 'I dun wanna!', '...', "Onii... stop being stupid...", "I didn't listen, can you repeat it, Onii?", "Don't ask me these kind of things!", 'Yes! Definitely, Onii-chan!', '(YAYOI)'],
+          'kick': "Get away from my Onii-chan!",
         },
+        // By JustWastingTime
         'jwt': {
           '0000': "Admiral, it's 0000 JST. You can tell by the sound of some idiot screaming \"Yasen, yasen!\" outside.",
           '0100': "It's not good to stay up this late admiral. It's already 0100 JST. Hmm...did you hear someone say hyahaa?",
@@ -260,7 +267,21 @@
 
           'randoms': ["I'm sorry, what? I was fondling Koai's ass.", "Only if it blends.", "No. FITE ME.", "/me avoids the question and rolls around.", "/me kicks Akios.", "Falukorv's the word.", "Obviously potato quality.", "Yessssssssssss, if you wouldn't be so noisy.", "Not now or I'll put you in a third turret explosion list.", '(amagi)'],
           'kick': 'Stop wasting my time.',
+          'hi': 'Hello there~',
+          'hello': "Hi, it's me, Yuki~",
+          'ohayou': "Oh? It's morning already?",
+          'good night': 'Good night, Admiral~',
+          'bye bye': 'Good bye.',
+          'good bye': "Leaving so soon? Why don't you waste more time here?",
+          'question?': 'Answer?',
+          'may i ask a question': '/me rolls around.',
+          'you suck': 'You want a (falukorv) inside you?',
+          'give me luck': 'Huh? Luck? Sure, you can take it all. [[User:Kazami Yuuka|Just click here]].',
+          'can i become chat mod': "Sure, let me put you in the list...of explosion targets.",
+          'love me': "/me prefers Koai's ass.",
+          'who are you': "It's me, Dio! No? It's just me, Yuki, here to serve.",
         },
+        // By KowaretaGuze
         'mochizuki': {
           '0000': "The time is 0000. Zzzz...",
           '0100': "The time is 0100. Admiral...",
@@ -296,14 +317,14 @@
           'bye bye': '/me waves.',
           'good bye': 'Yeah, see you soon.',
           'question?': 'What is it?',
-          'may i ask a question':
-            'Go ask someone else...',
+          'may i ask a question': 'Go ask someone else...',
           'you suck': '...What did you just say?',
           'give me luck': 'Have it. Just give me a day off...',
           'can i become chat mod': "Well, you'll have to ask the mods about that...",
           'love me': "I'd love you if you give me a break~ <3 ",
           'who are you': "Introductions? It's such a drag...",
         },
+        // By JustWastingTime
         'kamidere': {
           '0000': "0000 JST. The day changed, thanks to me of course. I am God after all~",
           '0100': "Hmm... 0100 JST, you're working hard. Good, good, you might be the perfect servant.",
@@ -333,23 +354,24 @@
           'randoms': ['Obviously.', "Err...I don't kno- I'm busy!", 'No, you imbecile.', 'Of course.', 'Hmph, stop bothering me.', '...', 'Hmm, no?', 'Yeah, I am a god after all', "Use your commo -- I guess you can't help it. The answer is no."],
           'kick': 'Huh? Repent, infidel.',
         },
+        // By Koai
         'clingy': {
-          '0000': "0000. Admiral, if you're not too busy, I would like to spend this night with you. Just the two of us... Alone. Okay~? ^^",
+          '0000': "0000. Admiral, if you're not too busy, I would like to spend this night with you. Just the two of us...alone. Okay~? ^^",
           '0100': "0100. It can get pretty cold during the night, huh, Admiral? Would you like to use me to warm yourself up? I don't mind. So long as you don't do this with anyone other than me.",
           '0200': "0200. When expeditions return, be sure to restock everyone's fuel and ammunition. Making sure they're alright? Well, I guess I can allow that much... Oh, nothing~!",
           '0300': "0300. When living on the edge, you've got to stay sharp. Much like the end of a blade, glistening with red... Huh? Oh, nothing.",
-          '0400': "0400. Admiral, it's time for physical excercises with the ship girls. Try not to get too physical with anyone that isn't me though, okay?",
+          '0400': "0400. Admiral, it's time for physical exercises with the ship girls. Try not to get too physical with anyone that isn't me though, okay?",
           '0500': "0500. Admiral, how was practice? You look a bit worn out. I don't dislike that tired look on your face, though...",
           '0600': "0600. The sunrise sure is beautiful, isn't it? If you'd like to watch together, I would be overjoyed. Say...has any other girl asked to watch with you?",
           '0700': "0700. It's about time for breakfast, Admiral. What would you like today? I can make anything if it's for you, Admiral...",
-          '0800': "0800. How did you like my pancakes? I hope they weren't too hard on your stomach. Eh? You wouldn't mind having them for lunch, as well as dinner? Admiral, you're much too kind. ",
+          '0800': "0800. How did you like my pancakes? I hope they weren't too hard on your stomach. Eh? You wouldn't mind having them for lunch, as well as dinner? Admiral, you're much too kind.",
           '0900': "0900. It seems our expeditions from last night have returned. Make sure to resupply and... Hey, are you staring at someone other than me?",
-          '1000': "1000. The docks are going to be filled up pretty soon... Admiral, when we ge the chance, want to go in together? You have to promise not to look at other girls, though!",
+          '1000': "1000. The docks are going to be filled up pretty soon... Admiral, when we get the chance, want to go in together? You have to promise not to look at other girls, though!",
           '1100': "1100. Admiral, it will soon be nearing lunch. You aren't still full from this morning's pancakes, are you...?",
           '1200': "1200. Oh? Mamiya prepared lunch? How thoughtful of her to make me something... What, you wanted to try some? You know I won't allow you to enjoy another woman's cooking, silly Admiral. Here, I'll make you something special~",
-          '1300': "1300. How was the fried lobster, Admiral? I used a lot of unqiue seasonings this time. (KISARAGI)",
+          '1300': "1300. How was the fried lobster, Admiral? I used a lot of unique seasonings this time. (KISARAGI)",
           '1400': "1400. My, my. You look a bit stressed, Admiral. Why not rest for a bit? I'll watch over you while you sleep.",
-          '1500': "1500. It's time for another phsyical exercise. Don't forget to change out the equipment from your last sortie run.",
+          '1500': "1500. It's time for another physical exercise. Don't forget to change out the equipment from your last sortie run.",
           '1600': "1600. Nice work, as always, Admiral! Should I reward you for not staring at other girls during practice?",
           '1700': "1700. Admiral, our expeditions have returned. We should begin preparing dinner for everyone. Ah, but don't worry. I'll make yours unique, of course.",
           '1800': "1800. Hibiki sure does love to help out in the kitchen, doesn't she? Such a sweet little girl. Ah, but don't look at her too much, okay? Your eyes were made to look at me.",
@@ -358,9 +380,9 @@
           '2100': "2100. It's alright, Admiral. I'll forgive you this time, only because I really like Hibiki, though.",
           '2200': "2200. Our expeditions are heading out again. Say, Admiral... How often do you check your quests? Ooyodo tells me she's very fond of you...",
           '2300': "2300. The true hours of the night are just beginning. Admiral, I often hear that people like to confess their affection under the blanket of moonlight. Do you...often get called on by other girls during the night, I wonder? That would be no good.",
-        },
 
-        'randoms': ['/me swiftly hides a medium-lengthed steel colored object.', "You know, I wouldn't mind if you spent less time speaking to others than you do with me.", 'Oh, did you need something? Did you want someone to disappear?', '/me stares silently with a smile.'],
+        'randoms': ['/me swiftly hides a medium-length, steel-colored object.', "You know, I wouldn't mind if you spent less time speaking to others than you do with me.", 'Oh, did you need something? Did you want someone to disappear?', '/me stares silently with a smile.'],
+        },
       };
     },
 
