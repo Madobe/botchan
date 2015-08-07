@@ -58,6 +58,12 @@
       return text.reverse().join('');
     },
 
+    remove_first_word(text) {
+      text = text.split(' ');
+      text.shift();
+      return this.remove_trailing(text.join(' '), '.').toString();
+    },
+
     get_authority(chat) {
       var names = ['Nanamin', '川内', 'CDRW'];
       var user = mainRoom.model.users.findByName(chat.attributes.name);

@@ -544,13 +544,20 @@
 
     redirect = this.add_function('^set personality ', 0, function(input, name, authority) {
       if(authority == ConstantsController.ACCESS_ALL) {
-        input = input.split(' ');
-        input.shift();
-        input = this.remove_trailing(input.join(' '), '.').toString();
+        input = this.remove_first_word(input);
         this.say("Personality set to \"" + input + "\"!");
         ConfigController.personality = input;
       }
     });
     this.add_redirect('^load personality', redirect);
+
+    this.add_function('^set mode ', 0, function(input, name, authority) {
+      if(authority == ConstantsController.ACCESS_ALL) {
+        input = this.remove_first_word(input);
+        var value = ConstantsController['MODE_' + input] || ConstantsController.MODE_NORMAL;
+        this.say("Mode set to " + value + "!");
+        ConfigController.mode = value;
+      }
+    });
 	};
 })();
