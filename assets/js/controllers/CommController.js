@@ -13,6 +13,8 @@
 
 (function() {
   window.CommController = {
+    "use strict";
+
     // Content script -> here
     listen: function() {
       var self = this;

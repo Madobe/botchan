@@ -6,6 +6,8 @@
  */
 
 (function() {
+  "use strict";
+
   window.ConstantsController = {
     // For use with ConfigController.mode
     MODE_NORMAL: 1,

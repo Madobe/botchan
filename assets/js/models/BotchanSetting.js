@@ -1,4 +1,13 @@
+/*
+ * Bot-chan Setting
+ *
+ * This was supposed to provide a way to create settings boxes. However, that functionality is
+ * currently in the devtools script and this script has been orphaned.
+ */
+
 (function() {
+  "use strict";
+
   window.BotchanSetting = function(type, field, name, options) {
     this.field = field;
     this.element = $('#templates .setting_container').clone().appendTo('#container .settings');

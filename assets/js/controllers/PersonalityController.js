@@ -1,3 +1,10 @@
+/*
+ * Personality Controller
+ *
+ * This controller holds all the lines for different personas that can be loaded by bot-chan. If a
+ * line does not exist for a specific personality, it will use the relevant entry in "default".
+ */
+
 (function() {
   "use strict";
 
