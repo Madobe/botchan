@@ -8,8 +8,9 @@
 (function() {
   window.ConstantsController = {
     // For use with ConfigController.mode
-    MODE_EVENT:  1,
-    MODE_NORMAL: 2,
+    MODE_NORMAL: 1,
+    MODE_EVENT:  2,
+    MODE_OFF:    3,
 
     // The difference access levels
     ACCESS_NORMAL:    0,

@@ -32,9 +32,7 @@
   // This is run in the context of MainController
   BotchanCommand.prototype.execute = function(command, chat) {
     if(!command.overweight(this.get_weight(chat), this.get_authority(chat))) {
-      if(ConfigController.mode == ConstantsController.MODE_EVENT
-         && ConstantsController.EVENT_COMMAND_WHITELIST.indexOf(command.trigger) == -1
-         && this.get_authority(chat) < ConstantsController.ACCESS_ADMIN) return true;
+      if(!this.mode_check(chat, command.trigger)) return true;
 
       this.add_weight(chat, command.weight);
       var temp = chat.attributes.text.split(' ');

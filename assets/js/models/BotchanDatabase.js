@@ -554,7 +554,7 @@
     this.add_function('^set mode ', 0, function(input, name, authority) {
       if(authority == ConstantsController.ACCESS_ALL) {
         input = this.remove_first_word(input);
-        var value = ConstantsController['MODE_' + input] || ConstantsController.MODE_NORMAL;
+        var value = ConstantsController['MODE_' + input.toUpperCase()] || ConstantsController.MODE_NORMAL;
         this.say("Mode set to " + value + "!");
         ConfigController.mode = value;
       }

@@ -91,6 +91,19 @@
       }
     },
 
+    mode_check(chat, trigger) {
+      if(ConfigController.mode == ConstantsController.MODE_EVENT) {
+        if(this.get_authority(chat) >= ConstantsController.ACCESS_ADMIN) return true;
+        else if(ConstantsController.EVENT_COMMAND_WHITELIST.indexOf(trigger) != -1) return true;
+        else return false;
+      } else if(ConfigController.mode == ConstantsController.MODE_OFF) {
+        if(this.get_authority(chat) == ConstantsController.ACCESS_ALL) return true;
+        else return false;
+      } else {
+        return true;
+      }
+    },
+
     strip_calls: function(chat) {
       // Remove the "bot-chan" from the front of the text
       var text = chat.attributes.text.split(' ');
@@ -131,7 +144,9 @@
 
           chat.attributes.text = this.strip_calls(chat);
           if(chat.attributes.text || chat.attributes.text === '') {
-            this.regular(chat);
+            if(this.mode_check(chat, '^help.?$')) {
+              this.regular(chat);
+            }
           }
         }
       }
@@ -165,6 +180,7 @@
       var command = this.database.search(chat.attributes.text);
       if(command) {
         if(command.type == "text") {
+          if(!this.mode_check(chat, command.trigger)) return true;
           this.add_weight(chat, command.weight);
           this.say(command.message);
         } else if(command.type == "function") {
@@ -173,6 +189,7 @@
       } else {
         // Random responses
         if(!this.overweight(chat, 3)) {
+          if(!this.mode_check(chat, 'N/A')) return true;
           this.add_weight(chat, 3);
           var replies = PersonalityController.get_line('randoms');
           var rand = Math.floor(Math.random() * replies.length);
