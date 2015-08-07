@@ -15,6 +15,7 @@
   }
 
   $(document).on('ready', function() {
+    loadScript('assets/js/controllers/ConstantsController.js');
     loadScript('assets/js/controllers/CommController.js');
     loadScript('assets/js/controllers/ConfigController.js');
     loadScript('assets/js/controllers/DataController.js');

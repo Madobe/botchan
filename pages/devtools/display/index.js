@@ -77,10 +77,10 @@
           .addClass(field + '_array')
           .val(array[keys[i]] || 'N/A')
           .on('change', function() {
-            var value = $('.' + field + '_array').map(function() {
+            var value = $(this).parent().children('.' + field + '_array').map(function() {
               return $(this).val();
             }).get();
-            DevtoolsManager.send({ field: field, value: $('.' + field + '_array').map(function() { return this.val(); }), action: action });
+            DevtoolsManager.send({ field: field, value: value, action: action });
           })
         );
         $('form', container).append('<div class="clear"></div>');

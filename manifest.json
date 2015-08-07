@@ -21,6 +21,7 @@
     ]
   },
   "web_accessible_resources": [
+    "assets/js/controllers/ConstantsController.js",
     "assets/js/controllers/CommController.js",
     "assets/js/controllers/ConfigController.js",
     "assets/js/controllers/DataController.js",

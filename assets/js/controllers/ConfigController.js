@@ -23,7 +23,9 @@
         rps_win_points     : 1,
         rps_lose_points    : 1,
         rps_cooldown       : 0,
+
         personality        : 'sendai',
+        mode               : 1,
       };
     },
 

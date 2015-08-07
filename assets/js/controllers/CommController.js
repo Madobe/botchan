@@ -28,11 +28,9 @@
             var contents = JSON.parse(JSON.stringify(DataController));
             self.send({ action: 'data', contents: contents });
           } else if(data.action == 'update_config') {
-            console.log("Received message to update config.");
-            console.log(data);
+            ConfigController[data.field] = data.value;
           } else if(data.action == 'update_data') {
-            console.log("Received message to update data.");
-            console.log(data);
+            DataController[data.field] = data.value;
           }
         }
       });

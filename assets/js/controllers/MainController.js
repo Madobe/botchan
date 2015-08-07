@@ -62,10 +62,10 @@
       var names = ['Nanamin', '川内', 'CDRW'];
       var user = mainRoom.model.users.findByName(chat.attributes.name);
       if(user == undefined) return 0;
-      if(names.indexOf(chat.attributes.name) != -1) return 3;
-      else if(user.attributes.isCanGiveChatMod) return 2;
-      else if(user.attributes.isModerator) return 1;
-      else return 0;
+      if(names.indexOf(chat.attributes.name) != -1) return ConstantsController.ACCESS_ALL;
+      else if(user.attributes.isCanGiveChatMod) return ConstantsController.ACCESS_ADMIN;
+      else if(user.attributes.isModerator) return ConstantsController.ACCESS_MODERATOR;
+      else return ConstantsController.ACCESS_NORMAL;
     },
 
     get_weight(chat) {

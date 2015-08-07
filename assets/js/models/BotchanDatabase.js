@@ -104,6 +104,7 @@
     redirect = this.add_text('^taigei.?$', 1, 'https://www.youtube.com/watch?v=VjdV-CSxyKc');
     this.add_redirect('^\\(?whale\\)?.?$', redirect);
     this.add_text('^unlimited (cat|error) works.?$', 1, 'http://i.imgur.com/Aa5nSof.jpg');
+    this.add_text('^never give up.?$', 1, 'https://www.youtube.com/watch?v=tYzMYcUty6s');
 
     redirect = this.add_text('^tweets.?$', 0, 'https://twitter.com/kancolle_staff');
     this.add_redirect('^twitter.?$', redirect);
@@ -125,6 +126,8 @@
     this.add_text('^suggestion thread', 0, 'http://kancolle.wikia.com/wiki/Thread:233278');
 
     this.add_text('^1-5 guide', 0, 'http://kancolle.wikia.com/wiki/User_blog:Admiral_Mikado/Extra_Operations_for_Dummies:_1-5');
+    this.add_text('^2-5 guide', 0, 'http://kancolle.wikia.com/wiki/User_blog:Admiral_Mikado/Extra_Operations_for_Dummies:_2-5');
+    this.add_text('^3-5 guide', 0, 'http://kancolle.wikia.com/wiki/User_blog:Admiral_Mikado/Extra_Operations_for_Dummies:_3-5');
     this.add_text('^3-2 leveling', 0, 'http://kancolle.wikia.com/wiki/User_blog:Shinhwalee/Guide_to_Power_Leveling_Heavy_Cruiser_%28CA%29_in_World_3-2A');
     this.add_text('^4-3 leveling', 0, 'http://kancolle.wikia.com/wiki/User_blog:Shinhwalee/World_4-3_Power_Level_Guide_for_DD_%26_CL');
 
@@ -156,6 +159,7 @@
     this.add_text('as 5-5|5-5 as', 0, '[5-5] Carrier Route: PA:158, AS:356, AS+:711 / Carrier R. Final: PA:168, AS:377, AS+:753');
     this.add_text('as 6-1|6-1 as', 0, '[6-1] PA:56, AS:126, AS+:252 / H Node: PA:120, AS:270, AS+:540');
     this.add_text('as 6-2|6-2 as', 0, '[6-2] H Node: PA:16, AS:35, AS+:69 / I Node: PA:68, AS:153, AS+:306 / Boss: PA:56, AS:126, AS+:252');
+    this.add_text('as 6-3|6-3 as', 0, '[6-3] No AS values on this map');
 
 		this.add_text('^who are you', 3, PersonalityController.get_line('who are you'));
 
@@ -248,7 +252,7 @@
 		this.add_redirect('^cut-in', redirect);
 		
 		this.add_function('^ban', 0, function(input, name, authority) {
-			if(authority < 2) return true;
+			if(authority < ConstantsController.ACCESS_ADMIN) return true;
 			input = input.split(' ');
 			var time = 300;
 			if(!isNaN(parseInt(input[0]))) time = parseInt(input.shift()) * 60;
@@ -259,7 +263,7 @@
 		});
 		
 		this.add_function('^reset games', 0, function(input, name, authority) {
-			if(authority == 3) {
+			if(authority == ConstantsController.ACCESS_ALL) {
 				DataController.game_cooldowns = {};
         this.flags.rps = false;
         this.rps_players = { all: [], rock: [], paper: [], scissors: [] };
@@ -269,7 +273,7 @@
 		});
 		
 		redirect = this.add_function('^reset all', 0, function(input, name, authority) {
-			if(authority == 3) {
+			if(authority == ConstantsController.ACCESS_ALL) {
 				DataController.cooldowns = [];
 				this.say('All cooldowns reset!');
 			}
@@ -277,7 +281,7 @@
 		this.add_redirect('^reset cooldowns', redirect);
 		
 		this.add_function('^reset', 0, function(input, name, authority) {
-			if(authority == 3) {
+			if(authority == ConstantsController.ACCESS_ALL) {
 				DataController.cooldowns[this.remove_trailing(input, '.')] = [];
 				this.say('Cooldowns reset for ' + this.remove_trailing(input, '.') + '!');
 			}
@@ -307,7 +311,7 @@
 		this.add_function('^remove explosion', 0, function(input, name, authority) {
 			if(authority) {
 				input = this.remove_trailing(input.substr(10), '.');
-				var index = DataController.explosions.indexOf(input);
+				var index = DataController.explosions.indexOf(input.toString());
 				if(input == 'Akios') {
 					this.say('Akios can\'t be removed from the list.');
 				} else if(index != -1) {
@@ -475,7 +479,7 @@
 		});
 
     redirect = this.add_function('^chat\\s?nuke', 0, function(input, name, authority) {
-      if(authority >= 2) {
+      if(authority >= ConstantsController.ACCESS_ADMIN) {
         var users = mainRoom.model.users.models;
         for(var i = 0; i < users.length; i++) {
           this.kick(users[i].attributes.name);
@@ -539,7 +543,7 @@
     });
 
     redirect = this.add_function('^set personality ', 0, function(input, name, authority) {
-      if(authority == 3) {
+      if(authority == ConstantsController.ACCESS_ALL) {
         input = input.split(' ');
         input.shift();
         input = this.remove_trailing(input.join(' '), '.').toString();

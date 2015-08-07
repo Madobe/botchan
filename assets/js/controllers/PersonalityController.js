@@ -5,7 +5,7 @@
     entries: function() {
       return {
         // By Nanamin
-        'defaults': {
+        'default': {
           '0000': "0000.",
           '0100': "0100.",
           '0200': "0200.",
@@ -391,8 +391,8 @@
     },
 
     get_line: function(identifier, personality) {
-      if(!personality) personality = ConfigController.personality || 'defaults';
-      return this[personality][identifier] || this['defaults'][identifier] || 'Line not available.';
+      if(!personality) personality = ConfigController.personality || 'default';
+      return this[personality][identifier] || this['default'][identifier] || 'Line not available.';
     },
   };
 
