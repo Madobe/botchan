@@ -30,6 +30,7 @@
     "assets/js/models/BotchanTimer.js",
     "assets/js/controllers/PersonalityController.js",
     "assets/js/controllers/TimerController.js",
+    "assets/js/controllers/LogsController.js",
     "assets/js/controllers/MainController.js"
   ],
   "content_scripts": [

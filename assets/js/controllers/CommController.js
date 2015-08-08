@@ -12,8 +12,9 @@
  */
 
 (function() {
+  "use strict";
+
   window.CommController = {
-    "use strict";
 
     // Content script -> here
     listen: function() {

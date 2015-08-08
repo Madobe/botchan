@@ -24,6 +24,7 @@
     loadScript('assets/js/models/BotchanTimer.js');
     loadScript('assets/js/controllers/PersonalityController.js');
     loadScript('assets/js/controllers/TimerController.js');
+    loadScript('assets/js/controllers/LogsController.js');
     loadScript('assets/js/controllers/MainController.js');
   });
 

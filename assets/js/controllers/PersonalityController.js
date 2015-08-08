@@ -82,7 +82,7 @@
           '2200': "2200. Admiral, please don't try to fight subs at night. No, just don't.",
           '2300': "2300. The moon is beautiful, isn't it? I can't tire of looking at how round it is.",
 
-          'randoms': ['Yeah!', "Let's do it!", 'Nope.', 'Night battle!', '(yasen)', 'Maybe?', 'No clue.'],
+          'randoms': ['Yeah!', "Let's do it!", 'Nope.', 'Night battle!', '(yasen)', 'Maybe?', 'No clue.', 'Night battle?', 'やーせーん！', 'Hm?'],
           'kick': 'やーせーん！',
         },
         'skynet': {

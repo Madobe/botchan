@@ -19,8 +19,7 @@
 
     // For adding a timer relative to the current time
     set_from_now: function(func, seconds, recurring) {
-      var time = seconds * 1000;
-      return this.ticks_from_now(func, time, recurring);
+      return this.ticks_from_now(func, seconds * 1000, recurring * 1000);
     },
 
     // For adding a timer at a specific time of day
