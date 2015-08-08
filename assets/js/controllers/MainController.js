@@ -65,7 +65,7 @@
     },
 
     get_authority(chat) {
-      var names = ['Nanamin', '川内', 'CDRW'];
+      var names = ['Nanamin', '川内', 'CDRW', 'Xenzul'];
       var user = mainRoom.model.users.findByName(chat.attributes.name);
       if(user == undefined) return 0;
       if(names.indexOf(chat.attributes.name) != -1) return ConstantsController.ACCESS_ALL;
