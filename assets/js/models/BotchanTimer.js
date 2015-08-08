@@ -12,7 +12,6 @@
     this.func = func;
     this.time = time;
     this.recurring = recurring;
-    this.is_interval = false;
     this.timer = setTimeout($.proxy(this.run, this), this.time - new Date().getTime());
   };
 
@@ -21,16 +20,14 @@
     this.func.call();
     if(this.recurring) {
       this.time = this.recurring + new Date().getTime();
-      this.timer = setInterval(this.func, this.recurring);
-      this.is_interval = true;
+      this.timer = setTimeout($.proxy(this.run, this), this.recurring);
     } else {
       TimerController.garbage_collect(this);
     }
   };
 
   BotchanTimer.prototype.stop = function() {
-    if(this.is_interval) clearInterval(this.timer);
-    else clearTimeout(this.timer);
+    clearTimeout(this.timer);
     TimerController.garbage_collect(this);
   };
 

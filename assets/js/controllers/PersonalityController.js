@@ -399,6 +399,7 @@
 
     get_line: function(identifier, personality) {
       if(!personality) personality = ConfigController.personality || 'default';
+      if(!this[personality]) personality = 'default';
       return this[personality][identifier] || this['default'][identifier] || 'Line not available.';
     },
   };

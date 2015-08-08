@@ -415,21 +415,18 @@
 			if(!this.flags['rps'] || this.rps_players.all.indexOf(name) != -1) return true;
       this.rps_players['all'].push(name);
 			this.rps_players['rock'].push(name);
-      this.say("Rock: " + this.rps_players['rock'].join(', '));
 		});
 		
 		this.add_function('paper', 0, function(input, name, authority) {
 			if(!this.flags['rps'] || this.rps_players.all.indexOf(name) != -1) return true;
       this.rps_players['all'].push(name);
 			this.rps_players['paper'].push(name);
-      this.say("Paper: " + this.rps_players['paper'].join(', '));
 		});
 		
 		this.add_function('scissors', 0, function(input, name, authority) {
 			if(!this.flags['rps'] || this.rps_players.all.indexOf(name) != -1) return true;
       this.rps_players['all'].push(name);
 			this.rps_players['scissors'].push(name);
-      this.say("Scissors: " + this.rps_players['scissors'].join(', '));
 		});
 
     this.add_function('^my e-peen', 1, function(input, name, authority) {

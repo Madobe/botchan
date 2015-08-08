@@ -201,6 +201,19 @@
     check_explosions: function(chat) {
       var keywords = {
         'Risemiria': 'explodes',
+        'TScript': 'suicide',
+        'TScript': 'escape',
+        'Epicureanpancake': 'suicide',
+        'JustWastingTime': 'sudoku',
+        'McDerp': 'riot',
+        'Shizen144': 'futa',
+        'Sylcion': 'fukou',
+        'Chezbitsu': 'for the glory of falukorv',
+        'Dnite77': ' kuma ',
+        'Risemiria': 'explodes',
+        'Erupi': 'kamo',
+        'Kololz': 'nachi',
+        'Leoverda': 'blood',
         /*
         'Akaryuu-565': '\\(tenryuu\\)',
         'Koai': 'ayuzz',
