@@ -130,5 +130,9 @@
     },
   };
 
+  window.addEventListener('beforeunload', function(e) {
+    LogsController.process_logs();
+  });
+
   LogsController.init();
 })();
