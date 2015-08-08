@@ -16,9 +16,11 @@
 
     to_utc_time: function(time) {
       time = time.split(':');
-      var offset = new Date().getTimezoneOffset() / 60;
+      var date = new Date();
+      var offset = date.getTimezoneOffset() / 60;
       var hour = parseInt(time[0]);
       hour += offset;
+      if(date.getUTCHours() - hour >= 12) hour += 12;
       return ('0' + hour).slice(-2) + ':' + ('0' + time[1]).slice(-2);
     },
 
@@ -44,7 +46,8 @@
           else callback(response);
         },
         error: function(xhr, error) {
-          console.log('AJAX error: ' + error);
+          console.log('AJAX error.');
+          console.log(error);
         }
       });
     },
@@ -129,10 +132,6 @@
       });
     },
   };
-
-  window.addEventListener('beforeunload', function(e) {
-    LogsController.process_logs();
-  });
 
   LogsController.init();
 })();

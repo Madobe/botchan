@@ -139,6 +139,7 @@
           this.inline(chat);
         } else if(this.is_regular(chat)) {
           this.check_links(chat);
+          this.check_suicides(chat);
           this.check_explosions(chat);
           $.proxy(this.add_stars, mainRoom.viewDiscussion)(chat);
 
@@ -198,9 +199,8 @@
       }
     },
 
-    check_explosions: function(chat) {
+    check_suicides: function(chat) {
       var keywords = {
-        'Risemiria': 'explodes',
         'TScript': 'suicide',
         'TScript': 'escape',
         'Epicureanpancake': 'suicide',
@@ -214,13 +214,22 @@
         'Erupi': 'kamo',
         'Kololz': 'nachi',
         'Leoverda': 'blood',
+      };
+      if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
+        this.kick(chat.attributes.name);
+      }
+    },
+
+    check_explosions: function(chat) {
+      var keywords = {
+        'Risemiria': 'explodes',
         /*
         'Akaryuu-565': '\\(tenryuu\\)',
         'Koai': 'ayuzz',
         'Arkayda': '\\(yayoi\\)',
         'JustWastingTime': '\\(poi\\)',
         */
-      }
+      };
       if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
         for(var i = 0; i < 5; i++) {
           var rand = Math.floor(Math.random() * DataController.explosions.length);
