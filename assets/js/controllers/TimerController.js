@@ -39,6 +39,10 @@
       var index = this.timers.indexOf(object);
       if(index != -1) this.timers.splice(index, 1);
     },
+
+    remaining: function() {
+      return this.timers.map(function(x) { return x.remaining(); });
+    },
   };
 
   TimerController.set_at_time(function() { MainController.say("PvP will reset in 30 minutes!"); }, "10:30:00", 1000 * 60 * 60 * 24);
