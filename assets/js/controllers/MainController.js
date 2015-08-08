@@ -132,7 +132,7 @@
 
     respond: function(chat) {
       if(!this.database) this.initialize_db();
-      if(chat.attributes.text == "Welcome to the Botchan Wikia chat" && chat.attributes.isInlineAlert) {
+      if(chat.attributes.text.indexOf("Welcome") != -1 && chat.attributes.isInlineAlert) {
         this.received_welcome = true;
       } else if(this.received_welcome) {
         if(this.is_inline(chat)) {
@@ -200,6 +200,7 @@
 
     check_explosions: function(chat) {
       var keywords = {
+        'Risemiria': 'explodes',
         /*
         'Akaryuu-565': '\\(tenryuu\\)',
         'Koai': 'ayuzz',
@@ -209,11 +210,8 @@
       }
       if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
         for(var i = 0; i < 5; i++) {
-          /*
           var rand = Math.floor(Math.random() * DataController.explosions.length);
           this.kick(DataController.explosions[rand]);
-          */
-          this.kick(this.select_random_person());
         }
         this.say(chat.attributes.name + "'s explosion has claimed a few lives.");
         this.kick(chat.attributes.name);

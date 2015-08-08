@@ -17,12 +17,12 @@
         mod_icon           : ' <img class="modicon" src="http://images2.wikia.nocookie.net/monchbox/images/6/6b/Icon-chatmod.png">',
 
         rr_win_points      : 10,
-        rr_lose_points     : 10,
-        rr_cooldown        : 0,
+        rr_lose_points     : 5,
+        rr_cooldown        : 1000 * 60 * 30,
 
-        rps_win_points     : 1,
+        rps_win_points     : 2,
         rps_lose_points    : 1,
-        rps_cooldown       : 0,
+        rps_cooldown       : 1000 * 60 * 30,
 
         personality        : 'sendai',
         mode               : 1,

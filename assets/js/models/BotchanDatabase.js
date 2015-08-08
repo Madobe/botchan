@@ -478,6 +478,7 @@
 			}
 		});
 
+    /*
     redirect = this.add_function('^chat\\s?nuke', 0, function(input, name, authority) {
       if(authority >= ConstantsController.ACCESS_ADMIN) {
         var users = mainRoom.model.users.models;
@@ -488,6 +489,7 @@
       }
     });
     this.add_redirect('^judgment day', redirect);
+    */
 
     this.add_function('^fortune', 3, function(input, name, authority) {
       var fortunes = [
