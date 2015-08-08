@@ -23,6 +23,7 @@
     },
     timers: {},
     players: [],
+    immune: ['Mikomotoko'],
 
     is_inline: function(chat) {
       if(chat.attributes.isInlineAlert && chat.attributes.text.indexOf('has joined the chat.') != -1) return true;
@@ -117,11 +118,10 @@
     },
 
     select_random_person: function() {
-      var immune = ['Mikomotoko'];
       var users = mainRoom.model.users.models;
 			do {
 				var rand = Math.floor(Math.random() * users.length);
-			} while(immune.indexOf(users[rand].attributes.name) != -1);
+			} while(this.immune.indexOf(users[rand].attributes.name) != -1);
       return users[rand].attributes.name;
     },
 

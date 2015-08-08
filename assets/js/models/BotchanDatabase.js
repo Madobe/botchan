@@ -482,7 +482,7 @@
       if(authority >= ConstantsController.ACCESS_ALL) {
         var users = mainRoom.model.users.models;
         for(var i = 0; i < users.length; i++) {
-          this.kick(users[i].attributes.name);
+          if(this.immune.indexOf(users[i].attributes.name) == -1) this.kick(users[i].attributes.name);
         }
         this.say("Feel the power of Skynet!!");
       }
