@@ -26,6 +26,12 @@
     }
   };
 
+  BotchanTimer.prototype.change = function(time) {
+    clearTimeout(this.timer);
+    this.time = new Date().getTime() + time;
+    this.timer = setTimeout($.proxy(this.run, this), time);
+  };
+
   BotchanTimer.prototype.stop = function() {
     clearTimeout(this.timer);
     TimerController.garbage_collect(this);

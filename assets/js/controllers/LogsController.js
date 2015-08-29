@@ -21,6 +21,7 @@
       var hour = parseInt(time[0]);
       hour += offset;
       if(date.getUTCHours() - hour >= 12) hour += 12;
+      if(hour >= 24) hour -= 24;
       return ('0' + hour).slice(-2) + ':' + ('0' + time[1]).slice(-2);
     },
 

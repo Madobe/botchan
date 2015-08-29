@@ -23,7 +23,26 @@
     },
     timers: {},
     players: [],
-    immune: ['Mikomotoko'],
+    all_powerful: ['Nanamin', '川内', 'CDRW', 'Admiral Mikado'],
+    immune: ['Mikomotoko', 'Hossinator', 'Ebisuisei'],
+
+    send: function(data, method, callback) {
+      data['format'] = 'json';
+      $.ajax({
+        data: data,
+        dataType: 'json',
+        url: wgScriptPath + '/api.php',
+        type: method,
+        success: function(response) {
+          if(response.error) showError('API error: ' + response.error.info);
+          else callback(response);
+        },
+        error: function(xhr, error) {
+          console.log('AJAX error.');
+          console.log(error);
+        }
+      });
+    },
 
     is_inline: function(chat) {
       if(chat.attributes.isInlineAlert && chat.attributes.text.indexOf('has joined the chat.') != -1) return true;
@@ -66,10 +85,9 @@
     },
 
     get_authority(chat) {
-      var names = ['Nanamin', '川内', 'CDRW', 'Xenzul'];
       var user = mainRoom.model.users.findByName(chat.attributes.name);
       if(user == undefined) return 0;
-      if(names.indexOf(chat.attributes.name) != -1) return ConstantsController.ACCESS_ALL;
+      if(this.all_powerful.indexOf(chat.attributes.name) != -1) return ConstantsController.ACCESS_ALL;
       else if(user.attributes.isCanGiveChatMod) return ConstantsController.ACCESS_ADMIN;
       else if(user.attributes.isModerator) return ConstantsController.ACCESS_MODERATOR;
       else return ConstantsController.ACCESS_NORMAL;
@@ -265,7 +283,7 @@
         this.say("I chose " + chosen + "! Winners: " + this.rps_players[winner].join(', ') + ". They gain " + ConfigController.rps_win_points + " e-peen point!");
         for(var i = 0; i < this.rps_players[winner].length; i++) {
           var username = this.rps_players[winner][i];
-          DataController.epeen[username] = (DataController.epeen[username] || 0) + 1;
+          DataController.epeen[username] = (DataController.epeen[username] || 0) + ConfigController.rps_win_points;
         }
       }
       if(this.rps_players[loser] && this.rps_players[loser].length == 0) {
@@ -274,7 +292,7 @@
         this.say("The losers are: " + this.rps_players[loser].join(', ') + ". They lose " + ConfigController.rps_lose_points + " e-peen point!");
         for(var i = 0; i < this.rps_players[loser].length; i++) {
           var username = this.rps_players[loser][i];
-          DataController.epeen[username] = (DataController.epeen[username] || 0) - 1;
+          DataController.epeen[username] = (DataController.epeen[username] || 0) - ConfigController.rps_lose_points;
         }
       }
       this.rps_players = { all: [], rock: [], paper: [], scissors: [] };

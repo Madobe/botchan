@@ -44,6 +44,18 @@
     else return command;
   }
 
+  BotchanDatabase.prototype.run = function(command) {
+    var command = this.search(command);
+    var chat = { attributes: { name: 'Nanamin', text: command } };
+    if(command) {
+      if(command.type == "text") {
+        MainController.say(command.message);
+      } else if(command.type == "function") {
+        $.proxy(command.execute, MainController)(command, chat);
+      }
+    }
+  }
+
   BotchanDatabase.prototype.reset = function() {
     // ======================================================================
     // == Text only
@@ -60,7 +72,8 @@
     this.add_text('^beep boop.?$', 3, 'Boop beep.');
     this.add_text('^boop beep.?$', 3, 'Beep boop.');
     this.add_text('^stupid question', 3, '(newsflash) READ THE FOCKIN\' WIKI!');
-    this.add_text('^hi', 3, PersonalityController.get_line('hi'));
+    redirect = this.add_text('^hi.?$', 3, PersonalityController.get_line('hi'));
+    this.add_redirect('^hi ', redirect);
     this.add_text('^hello', 3, PersonalityController.get_line('hello'));
     redirect = this.add_text('^おはよう', 3, PersonalityController.get_line('ohayou'));
     this.add_redirect('^ohayou?', redirect);
@@ -87,6 +100,7 @@
     this.add_redirect('^harasho.?$', redirect);
     this.add_text('^hoppou?.?$', 3, 'レップウ...オイテケ......');
     this.add_text('roma', 3, 'https://gyazo.com/6b5cc8aaf5158325d1052ff0187ea8c7');
+    this.add_text('(?=.*\\becho\\b)(?=.*(\\bsakawa\\b|\\bpyan\\b))(?=.*\\bflonn\\b)', 3, 'https://www.youtube.com/watch?v=iHQ9qNUtHAM&feature=youtu.be');
     this.add_text('(?=.*\\becho\\b)(?=.*(\\bsakawa\\b|\\bpyan\\b))', 3, 'Hah! She won\'t be dropping.');
 
     this.add_text( '^dechi', 3, '(de ) (chi )');
@@ -445,6 +459,18 @@
       string = string.slice(0, -2);
       this.say(string);
     });
+
+    this.add_function('^lady leaders', 1, function(input, name, authority) {
+      var string = "Lady leaders: ";
+      var sorted = Object.keys(DataController.epeen).sort(function(a, b) { return DataController.epeen[b] - DataController.epeen[a]; })
+      sorted.reverse();
+      for(var i = 0; i < 5; i++) {
+        if(sorted[i] == undefined) break;
+        string += "[" + (i + 1) + "] " + sorted[i] + " (" + DataController.epeen[sorted[i]] + "), ";
+      }
+      string = string.slice(0, -2);
+      this.say(string);
+    });
 		
 		this.add_function('(who\'?s|who is) playing', 1, function(input, name, authority) {
 			if(this.players.length > 0) {
@@ -464,8 +490,53 @@
 		
 		this.add_function('^register', 0, function(input, name, authority) {
 			input = input.split(' = ');
+      var test = this.remove_trailing(input[1], '.');
+      if(test.length > 75 && authority < ConstantsController.ACCESS_ALL) {
+        this.say("Input string cannot be longer than 75 characters. Last input was " + test.length + " characters.");
+        return true;
+      }
 			DataController.infobits[input[0]] = this.remove_trailing(input[1], '.');
 			this.say('"' + input[0] + '" has been registered with value "' + input[1] + '".');
+
+      // Upload the values to a page on the wikia
+      var self = this;
+      var values = '<pre>\n';
+      var keys = Object.keys(DataController.infobits);
+      for(var i = 0; i < keys.length; i++) {
+        values += keys[i] + '\n';
+        values += '=' + DataController.infobits[keys[i]] + '\n';
+      }
+      values += '</pre>';
+
+      var data = {
+        'action'      : 'query',
+        'prop'        : 'info|revisions',
+        'intoken'     : 'edit',
+        'titles'      : 'Project:Bot/Registered_Values',
+        'rvprop'      : 'content',
+        'rvlimit'     : '1',
+        'indexpageids': 'true',
+      };
+
+      this.send(data, 'GET', function(response) {
+        var page = response.query.pages[response.query.pageids[0]];
+        var content = typeof(page['revisions']) != 'undefined' ? page.revisions[0]['*'] : '';
+
+        var data = {
+          'minor'        : 'no',
+          'bot'          : 'yes',
+          'summary'      : 'Updating registered values.',
+          'action'       : 'edit',
+          'title'        : 'Project:Bot/Registered_Values',
+          'startimestamp': page.starttimestamp,
+          'token'        : page.edittoken,
+          'text'         : values,
+        };
+
+        self.send(data, 'POST', function(response) {
+          console.log("Registered values updated.");
+        });
+      });
 		});
 		
 		this.add_function('^recall', 0, function(input, name, authority) {
@@ -491,7 +562,7 @@
         "Compass-chan will take you for a ride ride ride~",
         "A lot of (salt) is in your future.",
         "You will have BEAVER LEVELS of luck.",
-        "That Bw2 quest of yours will take 50 more sorties.",
+        "That Bw4 quest of yours will take 50 more sorties.",
         "/me attaches a falukorv magnet onto your back.",
         "Beware of Ru, she's related to Re.",
         "Warning: (CATDIVE) is imminent.",
@@ -555,6 +626,27 @@
         this.say("Mode set to " + value + "!");
         ConfigController.mode = value;
       }
+    });
+
+    this.add_function('^remaining time', 0, function(input, name, authority) {
+      var event_end = new Date('09/06/15 19:00:00').getTime();
+      var time_left = (event_end - new Date().getTime()) / 1000;
+
+      var days = Math.floor(time_left / (60 * 60 * 24));
+      time_left %= 60 * 60 * 24;
+
+      var hours = Math.floor(time_left / 3600);
+      time_left %= 3600;
+      if(hours < 10) hours = "0" + hours;
+
+      var minutes = Math.floor(time_left / 60);
+      time_left %= 60;
+      if(minutes < 10) minutes = "0" + minutes;
+
+      if(time_left < 10) time_left = "0" + Math.floor(time_left);
+      else time_left = Math.floor(time_left);
+
+      this.say(days + " days and " + hours + ":" + minutes + ":" + time_left + " remaining.");
     });
 	};
 })();
