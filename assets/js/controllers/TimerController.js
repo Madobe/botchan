@@ -22,14 +22,14 @@
       return this.ticks_from_now(func, seconds * 1000, recurring * 1000);
     },
 
-    // For adding a timer at a specific time of day
+    // For adding a timer at a specific time of day; times are in UTC
     // Input format: Hours:Minutes:Seconds (eg. 23:59:59)
     set_at_time: function(func, time, recurring) {
       time = time.split(':');
       var date = new Date();
-      date.setHours(time[0]);
-      date.setMinutes(time[1]);
-      date.setSeconds(time[2]);
+      date.setUTCHours(time[0]);
+      date.setUTCMinutes(time[1]);
+      date.setUTCSeconds(time[2]);
       if(date.getTime() - new Date().getTime() < 0) date = date.getTime() + 1000 * 60 * 60 * 24;
       else date = date.getTime();
       return this.ticks_from_now(func, date - new Date().getTime(), recurring);
@@ -49,28 +49,28 @@
   TimerController.set_at_time(function() { MainController.say("PvP will reset in 30 minutes!"); }, "22:30:00", 1000 * 60 * 60 * 24);
   TimerController.set_at_time(function() { MainController.say("Quests will reset in 30 minutes!"); }, "12:30:00", 1000 * 60 * 60 * 24);
 
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0000')); }, "8:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0100')); }, "9:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0200')); }, "10:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0300')); }, "11:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0400')); }, "12:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0500')); }, "13:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0600')); }, "14:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0700')); }, "15:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0800')); }, "16:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0900')); }, "17:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1000')); }, "18:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1100')); }, "19:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1200')); }, "20:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1300')); }, "21:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1400')); }, "22:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1500')); }, "23:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1600')); }, "00:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1700')); }, "01:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1800')); }, "02:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1900')); }, "03:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2000')); }, "04:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2100')); }, "05:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2200')); }, "06:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0000')); }, "15:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0100')); }, "16:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0200')); }, "17:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0300')); }, "18:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0400')); }, "19:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0500')); }, "20:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0600')); }, "21:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0700')); }, "22:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0800')); }, "23:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0900')); }, "00:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1000')); }, "01:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1100')); }, "02:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1200')); }, "03:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1300')); }, "04:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1400')); }, "05:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1500')); }, "06:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1600')); }, "07:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1700')); }, "08:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1800')); }, "09:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('1900')); }, "10:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2000')); }, "11:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2100')); }, "12:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2200')); }, "13:00:00", 1000 * 60 * 60 * 24);
   TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2300')); }, "7:00:00", 1000 * 60 * 60 * 24);
 })();
