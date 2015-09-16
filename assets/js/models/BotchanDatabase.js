@@ -187,9 +187,10 @@
     });
 		
 		this.add_function('(who is|who\'?s) my (wife|waifu)', 3, function(input, name, authority) {
-			var shiplist = ['Tsu-Class Light Cruiser', 'Ri-Class Heavy Cruiser', 'Ne-Class Heavy Cruiser', 'Wo-chan', 'Ru-Class Battleship', 'Ta-Class Battleship', 'Re-Class Battleship', 'Armored Carrier Demon', 'Armored Carrier Princess', 'Anchorage Demon', 'Anchorage Princess', 'Southern Demon', 'Southern War Demon', 'Southern War Princess', 'Airfield Princess', 'Battleship Princess', 'Seaport-chan', 'Isolated Island Demon', 'Hoppou', 'Aircraft Carrier Demon', 'Midway Princess', 'Aircraft Carrier Princess', 'Destroyer Princess', 'Aircraft Carrier Water Demon', 'Light Cruiser Demon', 'Battleship Water Demon', 'Harbour Water Demon', 'Anchorage Water Demon'];
+			var shiplist = ['Tsu-Class Light Cruiser', 'Ri-Class Heavy Cruiser', 'Ne-Class Heavy Cruiser', 'Wo-chan', 'Ru-Class Battleship', 'Ta-Class Battleship', 'Re-Class Battleship', 'Armored Carrier Demon', 'Armored Carrier Princess', 'Anchorage Demon', 'Anchorage Princess', 'Southern Demon', 'Southern War Demon', 'Southern War Princess', 'Airfield Princess', 'Battleship Princess', 'Seaport-chan', 'Isolated Island Demon', 'Hoppou', 'Aircraft Carrier Demon', 'Midway Princess', 'Aircraft Carrier Princess', 'Destroyer Princess', 'Aircraft Carrier Water Demon', 'Light Cruiser Demon', 'Battleship Water Demon', 'Harbour Water Demon', 'Anchorage Water Demon', 'Seaplane Tender Princess', 'Air Defense Princess'];
 			if(name == 'TScript' || name == 'Epicureanpancake') shiplist = ['I-Class Destroyer'];
 			if(name == 'Ebisuisei') shiplist = ['Anchorage Water Demon'];
+      if(name == 'AbsoluteLuck') shiplist = ['Air Defense Princess'];
 			var rand = Math.floor(Math.random() * shiplist.length);
 			this.say(shiplist[rand] + ".");
 		});
@@ -546,17 +547,6 @@
 			}
 		});
 
-    redirect = this.add_function('^chat\\s?nuke', 0, function(input, name, authority) {
-      if(authority >= ConstantsController.ACCESS_ALL) {
-        var users = mainRoom.model.users.models;
-        for(var i = 0; i < users.length; i++) {
-          if(this.immune.indexOf(users[i].attributes.name) == -1) this.kick(users[i].attributes.name);
-        }
-        this.say("Feel the power of Skynet!!");
-      }
-    });
-    this.add_redirect('^judgment day', redirect);
-
     this.add_function('^fortune', 3, function(input, name, authority) {
       var fortunes = [
         "Compass-chan will take you for a ride ride ride~",
@@ -605,6 +595,8 @@
         "Kirishima needs a new mic to check. She keeps DROPPING them.",
         "Tea time for Kongou is srs bsns. (DEESU)",
         "2-4-11 is a form of love too!",
+        "You have just inherited Nana's Summer E-7 salt.",
+        "Today, everyone will compliment you. Specifically, your ass.",
       ];
       var rand = Math.floor(Math.random() * fortunes.length);
       this.say(fortunes[rand]);
@@ -629,7 +621,7 @@
     });
 
     this.add_function('^remaining time', 0, function(input, name, authority) {
-      var event_end = new Date('09/06/15 19:00:00').getTime();
+      var event_end = new Date('09/07/15 01:00:00').getTime();
       var time_left = (event_end - new Date().getTime()) / 1000;
 
       var days = Math.floor(time_left / (60 * 60 * 24));

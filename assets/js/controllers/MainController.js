@@ -25,6 +25,21 @@
     players: [],
     all_powerful: ['Nanamin', '川内', 'CDRW', 'Admiral Mikado'],
     immune: ['Mikomotoko', 'Hossinator', 'Ebisuisei'],
+    keywords: {
+      'TScript': 'suicide',
+      'TScript': 'escape',
+      'Epicureanpancake': 'suicide',
+      'JustWastingTime': 'sudoku',
+      'McDerp': 'riot',
+      'Shizen144': 'futa',
+      'Sylcion': 'fukou',
+      'Chezbitsu': 'for the glory of falukorv',
+      'Dnite77': ' kuma ',
+      'Risemiria': 'explodes',
+      'Erupi': 'kamo',
+      'Kololz': 'nachi',
+      'Leoverda': 'blood',
+    },
 
     send: function(data, method, callback) {
       data['format'] = 'json';
@@ -159,6 +174,7 @@
           this.check_links(chat);
           this.check_suicides(chat);
           this.check_explosions(chat);
+          this.check_hammers(chat);
           $.proxy(this.add_stars, mainRoom.viewDiscussion)(chat);
 
           chat.attributes.text = this.strip_calls(chat);
@@ -218,22 +234,7 @@
     },
 
     check_suicides: function(chat) {
-      var keywords = {
-        'TScript': 'suicide',
-        'TScript': 'escape',
-        'Epicureanpancake': 'suicide',
-        'JustWastingTime': 'sudoku',
-        'McDerp': 'riot',
-        'Shizen144': 'futa',
-        'Sylcion': 'fukou',
-        'Chezbitsu': 'for the glory of falukorv',
-        'Dnite77': ' kuma ',
-        'Risemiria': 'explodes',
-        'Erupi': 'kamo',
-        'Kololz': 'nachi',
-        'Leoverda': 'blood',
-      };
-      if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
+      if(this.keywords[chat.attributes.name] && new RegExp(this.keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
         this.kick(chat.attributes.name);
       }
     },
@@ -255,6 +256,20 @@
         }
         this.say(chat.attributes.name + "'s explosion has claimed a few lives.");
         this.kick(chat.attributes.name);
+      }
+    },
+
+    check_hammers: function(chat) {
+      var keywords = {
+        'Hossinator': 'hammer rain',
+        'CDRW': 'amagi',
+      };
+      if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
+        for(var i = 0; i < 5; i++) {
+          var rand = Math.floor(Math.random() * DataController.explosions.length);
+          this.kick(DataController.explosions[rand]);
+        }
+        this.say(chat.attributes.name + "'s hammer rain has claimed a few lives.");
       }
     },
     
@@ -280,7 +295,7 @@
       if(this.rps_players[winner] && this.rps_players[winner].length == 0) {
         this.say("I chose " + chosen + "! Nobody won!");
       } else {
-        this.say("I chose " + chosen + "! Winners: " + this.rps_players[winner].join(', ') + ". They gain " + ConfigController.rps_win_points + " e-peen point!");
+        this.say("I chose " + chosen + "! Winners: " + this.rps_players[winner].join(', ') + ". They gain " + ConfigController.rps_win_points + " e-peen!");
         for(var i = 0; i < this.rps_players[winner].length; i++) {
           var username = this.rps_players[winner][i];
           DataController.epeen[username] = (DataController.epeen[username] || 0) + ConfigController.rps_win_points;
@@ -289,7 +304,7 @@
       if(this.rps_players[loser] && this.rps_players[loser].length == 0) {
         this.say("No losers this round!");
       } else {
-        this.say("The losers are: " + this.rps_players[loser].join(', ') + ". They lose " + ConfigController.rps_lose_points + " e-peen point!");
+        this.say("The losers are: " + this.rps_players[loser].join(', ') + ". They lose " + ConfigController.rps_lose_points + " e-peen!");
         for(var i = 0; i < this.rps_players[loser].length; i++) {
           var username = this.rps_players[loser][i];
           DataController.epeen[username] = (DataController.epeen[username] || 0) - ConfigController.rps_lose_points;
