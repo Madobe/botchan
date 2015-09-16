@@ -45,9 +45,9 @@
     },
   };
 
-  TimerController.set_at_time(function() { MainController.say("PvP will reset in 30 minutes!"); }, "10:30:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say("PvP will reset in 30 minutes!"); }, "22:30:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say("Quests will reset in 30 minutes!"); }, "12:30:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say("PvP will reset in 30 minutes!"); }, "17:30:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say("PvP will reset in 30 minutes!"); }, "5:30:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say("Quests will reset in 30 minutes!"); }, "19:30:00", 1000 * 60 * 60 * 24);
 
   TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0000')); }, "15:00:00", 1000 * 60 * 60 * 24);
   TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('0100')); }, "16:00:00", 1000 * 60 * 60 * 24);
