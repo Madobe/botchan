@@ -72,5 +72,5 @@
   TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2000')); }, "11:00:00", 1000 * 60 * 60 * 24);
   TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2100')); }, "12:00:00", 1000 * 60 * 60 * 24);
   TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2200')); }, "13:00:00", 1000 * 60 * 60 * 24);
-  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2300')); }, "7:00:00", 1000 * 60 * 60 * 24);
+  TimerController.set_at_time(function() { MainController.say(PersonalityController.get_line('2300')); }, "14:00:00", 1000 * 60 * 60 * 24);
 })();
