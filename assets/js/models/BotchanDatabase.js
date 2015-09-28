@@ -597,6 +597,7 @@
         "2-4-11 is a form of love too!",
         "You have just inherited Nana's Summer E-7 salt.",
         "Today, everyone will compliment you. Specifically, your ass.",
+        "You will be as lucky as AL if you can dance the dance (y)",
       ];
       var rand = Math.floor(Math.random() * fortunes.length);
       this.say(fortunes[rand]);
