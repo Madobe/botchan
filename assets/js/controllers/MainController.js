@@ -241,7 +241,7 @@
 
     check_explosions: function(chat) {
       var keywords = {
-        'Risemiria': 'explodes',
+        //'Risemiria': 'explodes',
         /*
         'Akaryuu-565': '\\(tenryuu\\)',
         'Koai': 'ayuzz',
@@ -261,8 +261,10 @@
 
     check_hammers: function(chat) {
       var keywords = {
+        /*
         'Hossinator': 'hammer rain',
         'CDRW': 'amagi',
+        */
       };
       if(keywords[chat.attributes.name] && new RegExp(keywords[chat.attributes.name], 'gi').test(chat.attributes.text)) {
         for(var i = 0; i < 5; i++) {
