@@ -580,7 +580,7 @@
         "You will KUSO next event. LSC 7/7/7/7 100 to avoid this.",
         "A Nagamon will come for your best DDs.",
         "You will get Akbar'd unless you give Nanamin your soul.",
-        "Swear at Akios to have some of his luck.",
+        "Swear at AbsoluteLuck to have some of his luck.",
         "Want to be RNG besties? Go exceed Nanamin's fleet.",
         "You will grow up to be an elephant (LADY)",
         "Many (bucket)s will be used.",
