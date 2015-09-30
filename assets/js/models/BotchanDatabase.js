@@ -78,7 +78,8 @@
     redirect = this.add_text('^おはよう', 3, PersonalityController.get_line('ohayou'));
     this.add_redirect('^ohayou?', redirect);
     this.add_text('^good\\s?night', 3, PersonalityController.get_line('good night'));
-    this.add_text('^bye.?bye', 3, PersonalityController.get_line('bye bye'));
+    redirect = this.add_text('^bye.?bye', 3, PersonalityController.get_line('bye bye'));
+    this.add_redirect('^bye.?', redirect);
     this.add_text('^good.?bye', 3, PersonalityController.get_line('good bye'));
     this.add_text('^question.?$', 3, PersonalityController.get_line('question?'));
     redirect = this.add_text('^may i ask a question', 3, PersonalityController.get_line('may i ask a question'));
