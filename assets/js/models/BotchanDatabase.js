@@ -176,6 +176,14 @@
     this.add_text('as 6-2|6-2 as', 0, '[6-2] H Node: PA:16, AS:35, AS+:69 / I Node: PA:68, AS:153, AS+:306 / Boss: PA:56, AS:126, AS+:252');
     this.add_text('as 6-3|6-3 as', 0, '[6-3] No AS values on this map');
 
+    this.add_text('los 1-6|1-6 los', 0, '[1-6] ELoS: 16.6+');
+    this.add_text('los 2-5|2-5 los', 0, '[2-5] ELoS: 57.2~70.4 with 70.4 having a 100% chance of passing');
+    this.add_text('los 3-5|3-5 los', 0, '[3-5] ELoS: 28 at HQ 90~99');
+    this.add_text('los 4-5|4-5 los', 0, '[4-5] ELoS: From J: 61.2 / From H: 41.4');
+    this.add_text('los 6-1|6-1 los', 0, '[6-1] ELoS: 25~30 minimum');
+    this.add_text('los 6-2|6-2 los', 0, '[6-2] ELoS: 29~30.88 to H, 31+ has chance to go I; more ELoS = more chance to go I');
+    this.add_text('los 6-3|6-3 los', 0, '[6-3] ELoS: 53 (only report found)');
+
 		this.add_text('^who are you', 3, PersonalityController.get_line('who are you'));
 
     // ======================================================================
