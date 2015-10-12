@@ -40,6 +40,7 @@
       'Erupi': 'kamo',
       'Kololz': 'nachi',
       'Leoverda': 'blood',
+      'Stymphalian ID.27': 'This is blasphemy. This is madness.',
     },
 
     send: function(data, method, callback) {
