@@ -32,6 +32,7 @@
       'JustWastingTime': 'sudoku',
       'McDerp': 'riot',
       'Shizen144': 'futa',
+      'ShizenReFuta': 'futa',
       'Sylcion': 'fukou',
       'Chezbitsu': 'for the glory of falukorv',
       'Dnite77': ' kuma ',
