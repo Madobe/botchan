@@ -38,7 +38,7 @@
           '2200': "2200.",
           '2300': "2300.",
 
-          'randoms': ['No.', 'Absolutely not.', 'Never.', 'You wish.', 'Yes.', 'Definitely.', 'Absolutely.', 'Okay.', 'Maybe.', 'I dunno.', 'I can\'t tell you that right now.', 'Try asking again later.', '/me refrains from answering.', ':v', '<3', '(amagi)'],
+          'randoms': ['No.', 'Absolutely not.', 'Never.', 'You wish.', 'Yes.', 'Definitely.', 'Absolutely.', 'Okay.', 'Maybe.', 'I dunno.', 'I can\'t tell you that right now.', 'Try asking again later.', '/me refrains from answering.', ':v', '<3', '(amagi)', '(dechi)'],
 
           'kick': 'Get rekt!',
           'hi': 'Hello.',
