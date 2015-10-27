@@ -143,6 +143,7 @@
     this.add_text('^1-5 guide', 0, 'http://kancolle.wikia.com/wiki/User_blog:Admiral_Mikado/Extra_Operations_for_Dummies:_1-5');
     this.add_text('^2-5 guide', 0, 'http://kancolle.wikia.com/wiki/User_blog:Admiral_Mikado/Extra_Operations_for_Dummies:_2-5');
     this.add_text('^3-5 guide', 0, 'http://kancolle.wikia.com/wiki/User_blog:Admiral_Mikado/Extra_Operations_for_Dummies:_3-5');
+    this.add_text('^4-5 guide', 0, 'http://kancolle.wikia.com/wiki/User_blog:Admiral_Mikado/Extra_Operations_for_Dummies:_4-5');
     this.add_text('^3-2 leveling', 0, 'http://kancolle.wikia.com/wiki/User_blog:Shinhwalee/Guide_to_Power_Leveling_Heavy_Cruiser_%28CA%29_in_World_3-2A');
     this.add_text('^4-3 leveling', 0, 'http://kancolle.wikia.com/wiki/User_blog:Shinhwalee/World_4-3_Power_Level_Guide_for_DD_%26_CL');
 
