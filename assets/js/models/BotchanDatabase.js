@@ -609,6 +609,7 @@
         "Today, everyone will compliment you. Specifically, your ass.",
         "You will be as lucky as AL if you can dance the dance (y)",
         "Yuki will pick on you for the rest of today.",
+        "Your waifu's next remodel will require a blueprint, a protopault, an experimental plane, and 100 souls of the damned.",
       ];
       var rand = Math.floor(Math.random() * fortunes.length);
       this.say(fortunes[rand]);
