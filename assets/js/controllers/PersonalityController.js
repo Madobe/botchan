@@ -450,6 +450,7 @@
 
           'kick': 'BUUURNING....LOOOVE! (deesu)',
         },
+        // By Azurekaito15
         'kanmusu': {
           '0000': "0000 JST. Fufufu, Admiral, don't you want to sleep?",
           '0100': "0100 JST. *yawn*... Oh, sorry about that, Admiral.",
