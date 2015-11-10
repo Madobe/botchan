@@ -238,7 +238,7 @@
           '1800': "1800 JST. Onii-chan, should I start cooking dinner? What do you think of curry for today?.. Ok! It'll be ready soon!",
           '1900': "1900 JST! Awawa... you didnt need to jump like that to tell me it's good you know? I got it from Hiei's recipe",
           '2000': "2000 JST! ONII-CHAN WAKE UP! It's okay to take a nap after dinner but it's been 1 hour already!... Onii....chan..?",
-          '2100': "*sniff* *sniff* Are you awake, onii? Sorry! I-I... didnt know ir was so bad.. but you dont need to lie and eat it all, you know! It's 2100 JST!",
+          '2100': "*sniff* *sniff* Are you awake, onii? Sorry! I-I... didnt know it was so bad.. but you dont need to lie and eat it all, you know! It's 2100 JST!",
           '2200': "2200 JST. I guess your expeditions are back! By the way Onii, I've seen a ring in your inventary...",
           '2300': "2300 JST.. Onii, who are you giving that to.?.... No one? Oh.. never mind then.. that's good hehe~",
 
