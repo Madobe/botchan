@@ -23,7 +23,7 @@
     },
     timers: {},
     players: [],
-    all_powerful: ['Nanamin', '川内', 'CDRW', 'Admiral Mikado'],
+    all_powerful: ['Nanamin', '川内', 'CDRW', 'Admiral Mikado', 'Fujihita'],
     immune: ['Mikomotoko', 'Hossinator', 'Ebisuisei'],
     keywords: {
       'TScript': 'suicide',

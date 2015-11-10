@@ -101,8 +101,6 @@
     this.add_redirect('^harasho.?$', redirect);
     this.add_text('^hoppou?.?$', 3, 'レップウ...オイテケ......');
     this.add_text('roma', 3, 'https://gyazo.com/6b5cc8aaf5158325d1052ff0187ea8c7');
-    this.add_text('(?=.*\\becho\\b)(?=.*(\\bsakawa\\b|\\bpyan\\b))(?=.*\\bflonn\\b)', 3, 'https://www.youtube.com/watch?v=iHQ9qNUtHAM&feature=youtu.be');
-    this.add_text('(?=.*\\becho\\b)(?=.*(\\bsakawa\\b|\\bpyan\\b))', 3, 'Hah! She won\'t be dropping.');
 
     this.add_text( '^dechi', 3, '(de ) (chi )');
     this.add_text('^nanodesu', 3, '(na) (no) (de) (su)');
