@@ -478,7 +478,7 @@
           '2300': "2300 JST. So, who are you giving that to? I hope that someone gives me a ring...",
 
           'randoms': ['Yes, Admiral.', 'No, Admiral!', 'Hmm... How should I answer that Admiral?', 'Admiral, you\'re being ecchi like Dechi!', '...What?', 'Admiral... stop acting like Zak.', 'Sorry, could you repeat that again, Admiral?', "Don't ask me these kinds of things!", 'Yes! Admiral, I like yo... *blush* What you making me say!'],
-          'kick': "Go cool off your head first, Admiral",
+          'kick': "Go cool off your head first, Admiral.",
         },
       };
     },
