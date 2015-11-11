@@ -474,7 +474,7 @@
           '1900': "1900 JST. Admiral, it's my special curry dinner. I got the recipe from someone with the alias of 'H'.",
           '2000': "2000 JST! ADMIRAL, WAKE UP! Wh...What happened to you? You suddenly started forming at the mouth when you ate the curry.",
           '2100': "*sniff* *sniff* Are you awake, Admiral? Sorry! I-I...shouldn't feed you curry from Hie... It's nothing! 2100 JST!",
-          '2200': "2200 JST. By the way, Admiral, I've see a ring in your inventory...",
+          '2200': "2200 JST. By the way, Admiral, I've seen a ring in your inventory...",
           '2300': "2300 JST. So, who are you giving that to? I hope that someone gives me a ring...",
 
           'randoms': ['Yes, Admiral.', 'No, Admiral!', 'Hmm... How should I answer that Admiral?', 'Admiral, you\'re being ecchi like Dechi!', '...What?', 'Admiral... stop acting like Zak.', 'Sorry, could you repeat that again, Admiral?', "Don't ask me these kinds of things!", 'Yes! Admiral, I like yo... *blush* What you making me say!'],
