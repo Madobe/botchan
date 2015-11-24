@@ -183,17 +183,17 @@
     this.add_text('los 6-2|6-2 los', 0, '[6-2] ELoS: 29~30.88 to H, 31+ has chance to go I; more ELoS = more chance to go I');
     this.add_text('los 6-3|6-3 los', 0, '[6-3] ELoS: 53 (only report found)');
 
-    this.add_text('(?=.*\\be-?1\\b)(?=.*\\bas\\b)(?=.*\\beasy\\b)', '[E-1 Easy] F: PA:38, AS:84, AS+:168 / H: PA:16, AS:36, AS+:72');
-    this.add_text('(?=.*\\be-?1\\b)(?=.*\\bas\\b)(?=.*\\bmedium\\b)', '[E-1 Medium] F: PA:80, AS:180, AS+:360 / H: PA:16, AS:36, AS+:72');
-    this.add_text('(?=.*\\be-?1\\b)(?=.*\\bas\\b)(?=.*\\bhard\\b)', '[E-1 Hard] F: PA:123, AS:276, AS+:552 / H: PA:16, AS:35, AS+:69');
-    this.add_text('(?=.*\\be-?2\\b)(?=.*\\bas\\b)', '[E-2 All] No AS values on this map');
-    this.add_text('(?=.*\\be-?3\\b)(?=.*\\bas\\b)(?=.*\\beasy\\b)', '[E-3 Easy] PA:15, AS:33, AS+:66');
-    this.add_text('(?=.*\\be-?3\\b)(?=.*\\bas\\b)(?=.*\\bmedium\\b)', '[E-3 Medium] Normal: PA:15, AS:33, AS+:66 / Final: PA:48, AS:108, AS+:216');
-    this.add_text('(?=.*\\be-?3\\b)(?=.*\\bas\\b)(?=.*\\bhard\\b)', '[E-3 Hard] Normal: PA:48, AS:108, AS+:216 / Final: PA:59, AS:132, AS+:264');
-    this.add_text('(?=.*\\be-?4\\b)(?=.*\\bas\\b)(?=.*\\beasy\\b)', '[E-4 Easy] PA:62, AS:138, AS+:276');
-    this.add_text('(?=.*\\be-?4\\b)(?=.*\\bas\\b)(?=.*\\bmedium\\b)', '[E-4 Medium] PA:68, AS:153, AS+:306');
-    this.add_text('(?=.*\\be-?4\\b)(?=.*\\bas\\b)(?=.*\\bhard\\b)', '[E-4 Hard] PA:68, AS:153, AS+:306');
-    this.add_text('(?=.*\\be-?5\\b)(?=.*\\bas\\b)', '[E-5 All] No AS values on this map');
+    this.add_text('(?=.*\\be-?1\\b)(?=.*\\bas\\b)(?=.*\\beasy\\b)', 0, '[E-1 Easy] F: PA:38, AS:84, AS+:168 / H: PA:16, AS:36, AS+:72');
+    this.add_text('(?=.*\\be-?1\\b)(?=.*\\bas\\b)(?=.*\\bmedium\\b)', 0, '[E-1 Medium] F: PA:80, AS:180, AS+:360 / H: PA:16, AS:36, AS+:72');
+    this.add_text('(?=.*\\be-?1\\b)(?=.*\\bas\\b)(?=.*\\bhard\\b)', 0, '[E-1 Hard] F: PA:123, AS:276, AS+:552 / H: PA:16, AS:35, AS+:69');
+    this.add_text('(?=.*\\be-?2\\b)(?=.*\\bas\\b)', 0, '[E-2 All] No AS values on this map');
+    this.add_text('(?=.*\\be-?3\\b)(?=.*\\bas\\b)(?=.*\\beasy\\b)', 0, '[E-3 Easy] PA:15, AS:33, AS+:66');
+    this.add_text('(?=.*\\be-?3\\b)(?=.*\\bas\\b)(?=.*\\bmedium\\b)', 0, '[E-3 Medium] Normal: PA:15, AS:33, AS+:66 / Final: PA:48, AS:108, AS+:216');
+    this.add_text('(?=.*\\be-?3\\b)(?=.*\\bas\\b)(?=.*\\bhard\\b)', 0, '[E-3 Hard] Normal: PA:48, AS:108, AS+:216 / Final: PA:59, AS:132, AS+:264');
+    this.add_text('(?=.*\\be-?4\\b)(?=.*\\bas\\b)(?=.*\\beasy\\b)', 0, '[E-4 Easy] PA:62, AS:138, AS+:276');
+    this.add_text('(?=.*\\be-?4\\b)(?=.*\\bas\\b)(?=.*\\bmedium\\b)', 0, '[E-4 Medium] PA:68, AS:153, AS+:306');
+    this.add_text('(?=.*\\be-?4\\b)(?=.*\\bas\\b)(?=.*\\bhard\\b)', 0, '[E-4 Hard] PA:68, AS:153, AS+:306');
+    this.add_text('(?=.*\\be-?5\\b)(?=.*\\bas\\b)', 0, '[E-5 All] No AS values on this map');
 
 		this.add_text('^who are you', 3, PersonalityController.get_line('who are you'));
 
