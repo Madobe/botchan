@@ -596,7 +596,7 @@
         "You will grow up to be an elephant (LADY)",
         "Many (bucket)s will be used.",
         "You will last dance for 8 and 1/2 days. More or less.",
-        "Echo already married your shipfu. Unless she's Sakawa.",
+        "Echo already married your shipfu. Unless she's Umikaze.",
         "Your waifu will have an event-limited CG in the future.",
         "Stream your runs. Salt is best shared to everyone.",
         "Bot-chan best grill.",
