@@ -121,6 +121,7 @@
     },
 
     add_weight(chat, weight) {
+      if(ConfigController.mode == ConstantsController.MODE_NOCD) return;
       if(!DataController.cooldowns[chat.attributes.name]) DataController.cooldowns[chat.attributes.name] = [];
       var time = new Date().getTime();
       for(var i = 0; i < weight; i++) {

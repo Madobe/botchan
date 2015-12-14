@@ -13,6 +13,7 @@
     MODE_NORMAL: 1,
     MODE_EVENT:  2,
     MODE_OFF:    3,
+    MODE_NOCD:   4,
 
     // The difference access levels
     ACCESS_NORMAL:    0,
