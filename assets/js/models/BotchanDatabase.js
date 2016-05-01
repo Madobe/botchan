@@ -181,7 +181,7 @@
     this.add_text('los 4-5|4-5 los', 0, '[4-5] ELoS: From J: 61.2 / From H: 41.4');
     this.add_text('los 6-1|6-1 los', 0, '[6-1] ELoS: 25~30 minimum');
     this.add_text('los 6-2|6-2 los', 0, '[6-2] ELoS: 29~30.88 to H, 31+ has chance to go I; more ELoS = more chance to go I');
-    this.add_text('los 6-3|6-3 los', 0, '[6-3] ELoS: 53 (only report found)');
+    this.add_text('los 6-3|6-3 los', 0, '[6-3] ELoS: 35 (according to Flonnaru and Aldourien)');
 
     this.add_text('as e1e|e1e as', 0, '[E-1 Easy] F: PA:38, AS:84, AS+:168 / H: PA:16, AS:36, AS+:72');
     this.add_text('as e1m|e1m as', 0, '[E-1 Medium] F: PA:80, AS:180, AS+:360 / H: PA:16, AS:36, AS+:72');
